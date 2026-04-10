@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JC Advisory — Portfolio Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+:root {
+  --petrol-light: #C8DFE6;
+  --petrol-mid: #8BBFC9;
+  --petrol-deep: #2B6475;
+  --petrol-dark: #1C2B2F;
+  --blush: #F4C5C5;
+  --blush-deep: #9B3535;
+  --straw: #F5E6C0;
+  --straw-deep: #7C5B15;
+  --sage: #C9E8D5;
+  --sage-deep: #286B46;
+  --white: #ffffff;
+  --off-white: #F4F8F9;
+  --ink: #1C2B2F;
+  --ink-mid: #2B6475;
+  --ink-light: #6B8C96;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--off-white);
+  line-height: 1.7;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: #0F1A1D;
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid rgba(200,180,120,0.15);
+  padding: 0 3rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo svg { width: 28px; height: 28px; }
+
+.nav-brand {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #EEF6F8;
+  letter-spacing: -0.3px;
+}
+
+.nav-brand span {
+  font-weight: 300;
+  color: rgba(200,223,230,0.5);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #C8A85C;
+  text-decoration: none;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.nav-links a:hover { color: #E8C872; }
+
+/* ── HERO ── */
+.hero {
+  padding: 96px 3rem 3rem;
+  background: var(--petrol-dark);
+  color: #EEF6F8;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,223,230,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,223,230,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--petrol-mid);
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.hero-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(200,223,230,0.55);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--petrol-mid);
+  margin-bottom: 4px;
+}
+
+.hero-stat-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #EEF6F8;
+}
+
+/* ── SECTIONS ── */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+section {
+  padding: 4rem 0;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--petrol-deep);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::after {
+  content: '';
+  display: block;
+  height: 0.5px;
+  width: 40px;
+  background: var(--petrol-light);
+}
+
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+  margin-bottom: 0.25rem;
+}
+
+.section-desc {
+  font-size: 13px;
+  color: var(--ink-light);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 0.5px solid #ddeaed;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.card-subtitle {
+  font-size: 11px;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+/* ── GRID LAYOUTS ── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  nav { padding: 0 1.5rem; }
+  .container { padding: 0 1.5rem; }
+  .hero { padding: 80px 1.5rem 2rem; }
+  .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+}
+
+/* ── TABLES ── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table thead th {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-light);
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddeaed;
+}
+
+.data-table tbody td {
+  padding: 10px 12px;
+  border-bottom: 0.5px solid #eef3f4;
+  color: var(--ink);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.tag-equity { background: rgba(43,100,117,0.1); color: var(--petrol-deep); }
+.tag-fi { background: rgba(139,191,201,0.2); color: var(--petrol-deep); }
+
+/* ── CHART CONTAINERS ── */
+.chart-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.chart-wrap canvas {
+  width: 100% !important;
+}
+
+.donut-wrap {
+  position: relative;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.donut-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.donut-center-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.donut-center-label {
+  font-size: 10px;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── METRIC PILLS ── */
+.metrics-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.metric-pill {
+  background: var(--off-white);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  flex: 1;
+  min-width: 140px;
+}
+
+.metric-pill-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+
+.metric-pill-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.metric-pill-note {
+  font-size: 10px;
+  color: var(--ink-light);
+  margin-top: 2px;
+}
+
+/* ── LEGEND ── */
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--ink-light);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── PERFORMANCE SECTION ── */
+.perf-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .perf-layout { grid-template-columns: 1fr; }
+}
+
+.perf-chart-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 0.5px solid #ddeaed;
+  padding: 1.5rem 2rem 1rem;
+}
+
+.perf-chart-wrap {
+  position: relative;
+  height: 280px;
+}
+
+.perf-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.perf-metric-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 0.5px solid #ddeaed;
+  padding: 1.25rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.perf-metric-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+
+.perf-metric-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.perf-metric-value.positive { color: var(--sage-deep); }
+.perf-metric-value.negative { color: var(--blush-deep); }
+
+.perf-metric-sub {
+  font-size: 10px;
+  color: var(--ink-light);
+  margin-top: 2px;
+}
+
+/* ── UPLOAD SECTION ── */
+.upload-zone {
+  border: 2px dashed var(--petrol-light);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--white);
+}
+
+.upload-zone:hover {
+  border-color: var(--petrol-mid);
+  background: var(--off-white);
+}
+
+.upload-zone.dragover {
+  border-color: var(--petrol-deep);
+  background: rgba(43,100,117,0.05);
+}
+
+.upload-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem;
+  color: var(--petrol-mid);
+}
+
+.upload-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.upload-desc {
+  font-size: 12px;
+  color: var(--ink-light);
+}
+
+.upload-or {
+  margin: 1rem 0;
+  font-size: 11px;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.btn {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--petrol-deep);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--petrol-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--petrol-deep);
+  border: 1px solid var(--petrol-light);
+}
+
+.btn-ghost:hover {
+  background: var(--off-white);
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(28,43,47,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--white);
+  border-radius: 16px;
+  max-width: 560px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+}
+
+.modal-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.modal textarea {
+  width: 100%;
+  min-height: 180px;
+  border: 1px solid #ddeaed;
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal textarea:focus {
+  border-color: var(--petrol-mid);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+/* ── SPINNER ── */
+.spinner {
+  display: none;
+  width: 24px;
+  height: 24px;
+  border: 2.5px solid var(--petrol-light);
+  border-top-color: var(--petrol-deep);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 1rem auto;
+}
+
+.spinner.active { display: block; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── FOOTER ── */
+footer {
+  padding: 3rem;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-light);
+  border-top: 0.5px solid #ddeaed;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 0.5px;
+  background: #ddeaed;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="8" fill="#C8A85C"/>
+      <path d="M8 16 L16 8 L24 16 L16 24 Z" fill="#0F1A1D" opacity="0.4"/>
+      <path d="M12 16 L16 12 L20 16 L16 20 Z" fill="#0F1A1D"/>
+    </svg>
+    <span class="nav-brand">JC Advisory <span>| Wealth Management</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="scrollToSection('#performance')">Performance</a></li>
+    <li><a onclick="scrollToSection('#overview')">Overview</a></li>
+    <li><a onclick="scrollToSection('#equity')">Equity</a></li>
+    <li><a onclick="scrollToSection('#fixed-income')">Fixed Income</a></li>
+    <li><a onclick="scrollToSection('#upload')">Upload</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Portfolio Report</div>
+    <h1 id="heroTitle">Wealth Management Portfolio</h1>
+    <p class="hero-sub" id="heroDate">Report generated 10 April 2026</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-label">Holdings</span>
+        <span class="hero-stat-value" id="statHoldings">5</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-label">Equity</span>
+        <span class="hero-stat-value" id="statEquity">50%</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-label">Fixed Income</span>
+        <span class="hero-stat-value" id="statFI">51%</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-label">Wtd. Duration</span>
+        <span class="hero-stat-value" id="statDuration">3.3 yr</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-label">Wtd. Credit</span>
+        <span class="hero-stat-value" id="statCredit">A+</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PERFORMANCE ═══════════ -->
+<section id="performance">
+  <div class="container">
+    <div class="section-label">Performance</div>
+    <div class="section-title">Portfolio Performance</div>
+    <div class="section-desc">Simulated growth of the portfolio with fixed weights, rebased to 100 on 1 January 2023.</div>
+
+    <div class="perf-layout">
+      <div class="perf-chart-card">
+        <div class="card-title">Growth of 100</div>
+        <div class="perf-chart-wrap">
+          <canvas id="chartPerformance"></canvas>
+        </div>
+      </div>
+      <div class="perf-metrics">
+        <div class="perf-metric-card">
+          <div class="perf-metric-label">Since Jan 2023</div>
+          <div class="perf-metric-value" id="perfSince2023">—</div>
+          <div class="perf-metric-sub">Cumulative return</div>
+        </div>
+        <div class="perf-metric-card">
+          <div class="perf-metric-label">Year-to-Date</div>
+          <div class="perf-metric-value" id="perfYTD">—</div>
+          <div class="perf-metric-sub">2026 performance</div>
+        </div>
+        <div class="perf-metric-card">
+          <div class="perf-metric-label">Median Daily Return</div>
+          <div class="perf-metric-value" id="perfMedian">—</div>
+          <div class="perf-metric-sub">50th percentile</div>
+        </div>
+        <div class="perf-metric-card">
+          <div class="perf-metric-label">Annualised Volatility</div>
+          <div class="perf-metric-value" id="perfVol">—</div>
+          <div class="perf-metric-sub">Standard deviation &times; &radic;252</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ SECTION 1: OVERVIEW ═══════════ -->
+<section id="overview">
+  <div class="container">
+    <div class="section-label">Section 01</div>
+    <div class="section-title">Portfolio Overview</div>
+    <div class="section-desc">Asset allocation and composition across equity and fixed income holdings.</div>
+
+    <div class="grid-2">
+      <!-- Asset Allocation Donut -->
+      <div class="card">
+        <div class="card-title">Asset Allocation</div>
+        <div class="donut-wrap">
+          <canvas id="chartAllocation"></canvas>
+          <div class="donut-center">
+            <div class="donut-center-value" id="allocCenterVal">50 / 51</div>
+            <div class="donut-center-label">Equity / FI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Holdings Table -->
+      <div class="card">
+        <div class="card-title">Portfolio Composition</div>
+        <table class="data-table" id="holdingsTable">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Name</th>
+              <th>Class</th>
+              <th class="num">Weight</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ SECTION 2: EQUITY ═══════════ -->
+<section id="equity">
+  <div class="container">
+    <div class="section-label">Section 02</div>
+    <div class="section-title">Equity Breakdown</div>
+    <div class="section-desc">Sector and geographic exposure across equity holdings weighted by portfolio allocation.</div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Sector Exposure</div>
+        <div class="chart-wrap"><canvas id="chartEqSector"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Geographic Exposure</div>
+        <div class="chart-wrap"><canvas id="chartEqGeo"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ SECTION 3: FIXED INCOME ═══════════ -->
+<section id="fixed-income">
+  <div class="container">
+    <div class="section-label">Section 03</div>
+    <div class="section-title">Fixed Income Breakdown</div>
+    <div class="section-desc">Credit quality, duration, maturity, and exposure analysis across bond holdings.</div>
+
+    <!-- Key Metrics -->
+    <div class="metrics-row" id="fiMetrics">
+      <div class="metric-pill">
+        <div class="metric-pill-label">Wtd. Eff. Duration</div>
+        <div class="metric-pill-value" id="metricDuration">3.29 yr</div>
+        <div class="metric-pill-note">Interest rate sensitivity</div>
+      </div>
+      <div class="metric-pill">
+        <div class="metric-pill-label">Wtd. Avg. Maturity</div>
+        <div class="metric-pill-value" id="metricMaturity">3.83 yr</div>
+        <div class="metric-pill-note">Time to principal repayment</div>
+      </div>
+      <div class="metric-pill">
+        <div class="metric-pill-label">Wtd. Median Rating</div>
+        <div class="metric-pill-value" id="metricRating">A+</div>
+        <div class="metric-pill-note">Investment grade</div>
+      </div>
+      <div class="metric-pill">
+        <div class="metric-pill-label">Wtd. Yield (est.)</div>
+        <div class="metric-pill-value" id="metricYield">3.6%</div>
+        <div class="metric-pill-note">Blended YTM</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Sector Exposure</div>
+        <div class="chart-wrap"><canvas id="chartFiSector"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Geographic Exposure</div>
+        <div class="chart-wrap"><canvas id="chartFiGeo"></canvas></div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:0">
+      <div class="card">
+        <div class="card-title">Credit Quality</div>
+        <div class="chart-wrap"><canvas id="chartCredit"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Duration Distribution</div>
+        <div class="chart-wrap"><canvas id="chartDuration"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Maturity Profile</div>
+        <div class="chart-wrap"><canvas id="chartMaturity"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ SECTION 4: UPLOAD ═══════════ -->
+<section id="upload">
+  <div class="container">
+    <div class="section-label">Section 04</div>
+    <div class="section-title">Upload New Portfolio</div>
+    <div class="section-desc">Upload a portfolio image or enter holdings manually to generate a new report.</div>
+
+    <div class="grid-2">
+      <!-- Image Upload -->
+      <div class="upload-zone" id="dropZone">
+        <svg class="upload-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="6" y="10" width="36" height="28" rx="4"/>
+          <circle cx="18" cy="22" r="4"/>
+          <path d="M6 34 l12-10 8 6 10-12 6 8"/>
+        </svg>
+        <div class="upload-title">Drop portfolio image here</div>
+        <div class="upload-desc">Supports PNG, JPG, or screenshot of a portfolio table</div>
+        <div class="upload-or">or</div>
+        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+        <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileUpload(this.files[0])">
+      </div>
+
+      <!-- Manual Entry -->
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="card-title">Enter Manually</div>
+        <p style="font-size:12px;color:var(--ink-light);margin-bottom:1rem;">
+          Enter one holding per line: <code style="background:var(--off-white);padding:2px 6px;border-radius:4px;font-size:11px;">TICKER, Weight%</code>
+        </p>
+        <textarea id="manualInput" placeholder="VUAA, 27&#10;IUSQ, 23&#10;IBCS, 27&#10;SXRH, 7&#10;SYBW, 17" style="width:100%;min-height:160px;border:1px solid #ddeaed;border-radius:8px;padding:1rem;font-family:'Inter',sans-serif;font-size:13px;resize:vertical;outline:none;"></textarea>
+        <div style="margin-top:1rem;display:flex;gap:0.75rem;">
+          <button class="btn btn-primary" onclick="handleManualEntry()">Generate Report</button>
+        </div>
+        <div class="spinner" id="manualSpinner"></div>
+        <div id="uploadStatus" style="font-size:12px;color:var(--ink-light);margin-top:0.5rem;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  JC Advisory &mdash; Wealth Management Portfolio Report &middot; Confidential &middot; Generated 10 April 2026
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<script>
+// ── Brand Palette ──
+const P = {
+  petrolDeep: '#2B6475',
+  petrolDark: '#1C2B2F',
+  petrolMid: '#8BBFC9',
+  petrolLight: '#C8DFE6',
+  blush: '#F4C5C5',
+  blushDeep: '#9B3535',
+  straw: '#F5E6C0',
+  strawDeep: '#7C5B15',
+  sage: '#C9E8D5',
+  sageDeep: '#286B46',
+  ink: '#1C2B2F',
+  inkLight: '#6B8C96',
+};
+
+const CHART_COLORS = [
+  P.petrolDeep, P.petrolMid, P.sage, P.straw, P.blush,
+  P.sageDeep, P.strawDeep, P.blushDeep, P.petrolLight, P.petrolDark,
+  '#A8D4DC', '#D4A8A8', '#D4CCA8', '#A8D4B8', '#BCA8D4',
+];
+
+// ── ETF Knowledge Base ──
+const ETF_DB = {
+  // ── EQUITY ETFs ──
+  VUAA: {
+    name: 'Vanguard S&P 500 UCITS (Acc)',
+    assetClass: 'Equity',
+    sectors: {
+      'Information Technology': 31.5, 'Financials': 13.5, 'Healthcare': 11.5,
+      'Consumer Discretionary': 10.5, 'Communication Services': 9.0, 'Industrials': 8.5,
+      'Consumer Staples': 5.5, 'Energy': 3.5, 'Utilities': 2.5,
+      'Materials': 2.0, 'Real Estate': 2.0
+    },
+    geography: { 'United States': 100 },
+    duration: null, maturity: null, creditQuality: null, ytm: null
+  },
+  IUSQ: {
+    name: 'iShares MSCI ACWI (Acc)',
+    assetClass: 'Equity',
+    sectors: {
+      'Information Technology': 25.5, 'Financials': 16.5, 'Healthcare': 11.0,
+      'Consumer Discretionary': 11.0, 'Industrials': 10.5, 'Communication Services': 8.0,
+      'Consumer Staples': 6.0, 'Energy': 4.0, 'Materials': 4.0,
+      'Utilities': 2.5, 'Real Estate': 1.0
+    },
+    geography: {
+      'United States': 64, 'Japan': 5.5, 'United Kingdom': 3.5, 'France': 3.0,
+      'Canada': 3.0, 'China': 2.5, 'Switzerland': 2.5, 'Germany': 2.0,
+      'Australia': 1.8, 'India': 2.0, 'Other': 10.2
+    },
+    duration: null, maturity: null, creditQuality: null, ytm: null
+  },
+  CSPX: {
+    name: 'iShares Core S&P 500 UCITS (Acc)',
+    assetClass: 'Equity',
+    sectors: {
+      'Information Technology': 31.5, 'Financials': 13.5, 'Healthcare': 11.5,
+      'Consumer Discretionary': 10.5, 'Communication Services': 9.0, 'Industrials': 8.5,
+      'Consumer Staples': 5.5, 'Energy': 3.5, 'Utilities': 2.5,
+      'Materials': 2.0, 'Real Estate': 2.0
+    },
+    geography: { 'United States': 100 },
+    duration: null, maturity: null, creditQuality: null, ytm: null
+  },
+  VWCE: {
+    name: 'Vanguard FTSE All-World UCITS (Acc)',
+    assetClass: 'Equity',
+    sectors: {
+      'Information Technology': 25.0, 'Financials': 16.0, 'Healthcare': 11.0,
+      'Consumer Discretionary': 11.0, 'Industrials': 11.0, 'Communication Services': 7.5,
+      'Consumer Staples': 6.0, 'Energy': 4.5, 'Materials': 4.0,
+      'Utilities': 3.0, 'Real Estate': 1.0
+    },
+    geography: {
+      'United States': 62, 'Japan': 6.0, 'United Kingdom': 3.5, 'China': 3.0,
+      'France': 2.8, 'Canada': 2.8, 'Switzerland': 2.4, 'Germany': 2.0,
+      'Australia': 1.8, 'India': 2.2, 'Other': 11.5
+    },
+    duration: null, maturity: null, creditQuality: null, ytm: null
+  },
+  // ── FIXED INCOME ETFs ──
+  IBCS: {
+    name: 'iShares EUR Corp Bond Large Cap (Dist)',
+    assetClass: 'Fixed Income',
+    fiSubtype: 'Corporate',
+    sectors: {
+      'Banking': 38, 'Insurance': 8, 'Utilities': 8, 'Telecommunications': 8,
+      'Consumer Products': 7, 'Industrial': 7, 'Energy': 6, 'Healthcare': 5,
+      'Technology': 4, 'Automotive': 4, 'Other': 5
+    },
+    geography: {
+      'France': 22, 'Germany': 14, 'Netherlands': 11, 'United States': 10,
+      'United Kingdom': 9, 'Italy': 7, 'Spain': 5, 'Belgium': 3,
+      'Luxembourg': 3, 'Other': 16
+    },
+    duration: 4.4, maturity: 5.3,
+    creditQuality: { 'AAA': 1, 'AA': 7, 'A': 42, 'BBB': 50 },
+    ytm: 3.4
+  },
+  SXRH: {
+    name: 'iShares TIPS 0-5 UCITS ETF USD',
+    assetClass: 'Fixed Income',
+    fiSubtype: 'Government (TIPS)',
+    sectors: { 'US TIPS (Inflation-Linked)': 100 },
+    geography: { 'United States': 100 },
+    duration: 2.4, maturity: 2.6,
+    creditQuality: { 'AAA': 100 },
+    ytm: 2.2
+  },
+  SYBW: {
+    name: 'SPDR Bloomberg 1-3Y US Treasury',
+    assetClass: 'Fixed Income',
+    fiSubtype: 'Government (Treasury)',
+    sectors: { 'US Treasury': 100 },
+    geography: { 'United States': 100 },
+    duration: 1.9, maturity: 2.0,
+    creditQuality: { 'AAA': 100 },
+    ytm: 4.2
+  },
+  AGGH: {
+    name: 'iShares Core Global Aggregate Bond',
+    assetClass: 'Fixed Income',
+    fiSubtype: 'Aggregate',
+    sectors: {
+      'Government': 50, 'Securitized': 14, 'Corporate': 18,
+      'Government-Related': 11, 'Cash': 7
+    },
+    geography: {
+      'United States': 40, 'Japan': 11, 'France': 5, 'Germany': 5,
+      'United Kingdom': 4, 'Italy': 4, 'China': 3, 'Canada': 3, 'Other': 25
+    },
+    duration: 6.5, maturity: 8.5,
+    creditQuality: { 'AAA': 55, 'AA': 10, 'A': 15, 'BBB': 20 },
+    ytm: 3.8
+  },
+  IEAG: {
+    name: 'iShares Core EUR Govt Bond',
+    assetClass: 'Fixed Income',
+    fiSubtype: 'Government',
+    sectors: { 'Euro Government Bonds': 100 },
+    geography: {
+      'France': 24, 'Italy': 22, 'Germany': 18, 'Spain': 14,
+      'Belgium': 5, 'Netherlands': 5, 'Other': 12
+    },
+    duration: 7.0, maturity: 8.8,
+    creditQuality: { 'AAA': 25, 'AA': 30, 'A': 20, 'BBB': 25 },
+    ytm: 3.0
+  }
+};
+
+// ── Current Portfolio State ──
+let portfolio = [
+  { ticker: 'VUAA', weight: 27 },
+  { ticker: 'IUSQ', weight: 23 },
+  { ticker: 'IBCS', weight: 27 },
+  { ticker: 'SXRH', weight: 7 },
+  { ticker: 'SYBW', weight: 17 },
+];
+
+let charts = {};
+
+// ── Utility ──
+function scrollToSection(sel) {
+  document.querySelector(sel)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+function blend(holdings, property) {
+  const result = {};
+  let totalWeight = 0;
+  holdings.forEach(h => {
+    const etf = ETF_DB[h.ticker];
+    if (!etf || !etf[property]) return;
+    totalWeight += h.weight;
+    Object.entries(etf[property]).forEach(([k, v]) => {
+      result[k] = (result[k] || 0) + (h.weight * v);
+    });
+  });
+  if (totalWeight === 0) return {};
+  Object.keys(result).forEach(k => result[k] = +(result[k] / totalWeight).toFixed(2));
+  return result;
+}
+
+function sortedEntries(obj) {
+  return Object.entries(obj).sort((a, b) => b[1] - a[1]);
+}
+
+function destroyCharts() {
+  Object.values(charts).forEach(c => { if (c) c.destroy(); });
+  charts = {};
+}
+
+// ── Chart Defaults ──
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = P.inkLight;
+
+function makeBarChart(canvasId, labels, data, color) {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  charts[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: color || P.petrolDeep,
+        borderRadius: 4,
+        barPercentage: 0.7,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: P.petrolDark,
+          titleFont: { family: "'Inter', sans-serif", size: 11 },
+          bodyFont: { family: "'Inter', sans-serif", size: 11 },
+          callbacks: { label: ctx => ctx.parsed.x.toFixed(1) + '%' }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(200,223,230,0.2)', drawBorder: false },
+          ticks: { callback: v => v + '%', font: { size: 10 } },
+          max: Math.ceil(Math.max(...data) / 5) * 5 + 5
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { size: 10 } }
+        }
+      }
+    }
+  });
+  // Set canvas height based on items
+  document.getElementById(canvasId).parentElement.style.height = Math.max(200, labels.length * 32) + 'px';
+}
+
+function makeDoughnut(canvasId, labels, data, colors) {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  charts[canvasId] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: colors || CHART_COLORS.slice(0, labels.length),
+        borderWidth: 2,
+        borderColor: '#fff',
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '64%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            padding: 12,
+            usePointStyle: true,
+            pointStyle: 'circle',
+            font: { size: 10 }
+          }
+        },
+        tooltip: {
+          backgroundColor: P.petrolDark,
+          callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed.toFixed(1) + '%' }
+        }
+      }
+    }
+  });
+}
+
+function makeVerticalBar(canvasId, labels, data, colors, annotation) {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  charts[canvasId] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: colors || labels.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]),
+        borderRadius: 4,
+        barPercentage: 0.6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: P.petrolDark,
+          callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '%' }
+        }
+      },
+      scales: {
+        y: {
+          grid: { color: 'rgba(200,223,230,0.2)', drawBorder: false },
+          ticks: { callback: v => v + '%', font: { size: 10 } }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { font: { size: 10 } }
+        }
+      }
+    }
+  });
+}
+
+// ── Performance Simulation ──
+// Expected annual returns & volatilities per ETF (reasonable estimates)
+const ETF_PARAMS = {
+  VUAA: { annRet: 0.12, annVol: 0.16 },   // S&P 500
+  IUSQ: { annRet: 0.10, annVol: 0.14 },   // MSCI ACWI
+  CSPX: { annRet: 0.12, annVol: 0.16 },   // S&P 500
+  VWCE: { annRet: 0.10, annVol: 0.14 },   // FTSE All-World
+  IBCS: { annRet: 0.04, annVol: 0.05 },   // EUR IG Corp
+  SXRH: { annRet: 0.03, annVol: 0.03 },   // TIPS 0-5
+  SYBW: { annRet: 0.035, annVol: 0.02 },  // 1-3Y Treasury
+  AGGH: { annRet: 0.035, annVol: 0.06 },  // Global Agg
+  IEAG: { annRet: 0.03, annVol: 0.07 },   // EUR Govt
+};
+
+// Seeded PRNG for reproducible results
+function mulberry32(seed) {
+  return function() {
+    let t = seed += 0x6D2B79F5;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+// Box-Muller for normal distribution
+function normalRandom(rng) {
+  let u, v;
+  do { u = rng(); } while (u === 0);
+  v = rng();
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+
+function generatePerformanceData(holdings) {
+  const startDate = new Date(2023, 0, 2); // Jan 2, 2023
+  const endDate = new Date(2026, 3, 10);  // Apr 10, 2026
+  const rng = mulberry32(42);
+
+  // Generate daily dates (skip weekends)
+  const dates = [];
+  let d = new Date(startDate);
+  while (d <= endDate) {
+    const dow = d.getDay();
+    if (dow !== 0 && dow !== 6) dates.push(new Date(d));
+    d.setDate(d.getDate() + 1);
+  }
+
+  const tradingDays = dates.length;
+
+  // Generate individual ETF price paths
+  const etfPrices = {};
+  holdings.forEach(h => {
+    const params = ETF_PARAMS[h.ticker] || { annRet: 0.05, annVol: 0.10 };
+    const dailyMu = params.annRet / 252;
+    const dailySigma = params.annVol / Math.sqrt(252);
+    const prices = [100];
+    for (let i = 1; i < tradingDays; i++) {
+      const shock = normalRandom(rng);
+      const ret = dailyMu + dailySigma * shock;
+      prices.push(prices[i - 1] * (1 + ret));
+    }
+    etfPrices[h.ticker] = prices;
+  });
+
+  // Blend into portfolio with fixed weights
+  const totalWeight = holdings.reduce((s, h) => s + h.weight, 0);
+  const portfolioPrices = [];
+  for (let i = 0; i < tradingDays; i++) {
+    let val = 0;
+    holdings.forEach(h => {
+      const prices = etfPrices[h.ticker];
+      if (prices) val += (h.weight / totalWeight) * prices[i];
+    });
+    portfolioPrices.push(val);
+  }
+
+  // Compute daily returns
+  const dailyReturns = [];
+  for (let i = 1; i < portfolioPrices.length; i++) {
+    dailyReturns.push(portfolioPrices[i] / portfolioPrices[i - 1] - 1);
+  }
+
+  // Metrics
+  const lastPrice = portfolioPrices[portfolioPrices.length - 1];
+  const cumReturn = (lastPrice / 100 - 1) * 100;
+
+  // YTD: find first trading day of 2026
+  const ytdIdx = dates.findIndex(dt => dt.getFullYear() === 2026);
+  const ytdReturn = ytdIdx > 0 ? (lastPrice / portfolioPrices[ytdIdx] - 1) * 100 : 0;
+
+  // Median daily return
+  const sorted = [...dailyReturns].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  const medianReturn = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+
+  // Annualised volatility
+  const mean = dailyReturns.reduce((s, r) => s + r, 0) / dailyReturns.length;
+  const variance = dailyReturns.reduce((s, r) => s + (r - mean) ** 2, 0) / (dailyReturns.length - 1);
+  const annVol = Math.sqrt(variance) * Math.sqrt(252) * 100;
+
+  return {
+    dates,
+    prices: portfolioPrices,
+    cumReturn,
+    ytdReturn,
+    medianReturn: medianReturn * 100,
+    annVol
+  };
+}
+
+function renderPerformance() {
+  if (charts['chartPerformance']) charts['chartPerformance'].destroy();
+
+  const perf = generatePerformanceData(portfolio);
+
+  // Update metric cards
+  const fmt = (v, decimals = 1) => (v >= 0 ? '+' : '') + v.toFixed(decimals) + '%';
+  const cls = v => v >= 0 ? 'positive' : 'negative';
+
+  const elSince = document.getElementById('perfSince2023');
+  elSince.textContent = fmt(perf.cumReturn);
+  elSince.className = 'perf-metric-value ' + cls(perf.cumReturn);
+
+  const elYTD = document.getElementById('perfYTD');
+  elYTD.textContent = fmt(perf.ytdReturn);
+  elYTD.className = 'perf-metric-value ' + cls(perf.ytdReturn);
+
+  const elMedian = document.getElementById('perfMedian');
+  elMedian.textContent = fmt(perf.medianReturn, 3);
+  elMedian.className = 'perf-metric-value ' + cls(perf.medianReturn);
+
+  document.getElementById('perfVol').textContent = perf.annVol.toFixed(1) + '%';
+
+  // Chart
+  const ctx = document.getElementById('chartPerformance').getContext('2d');
+
+  // Gradient fill
+  const gradient = ctx.createLinearGradient(0, 0, 0, 280);
+  gradient.addColorStop(0, 'rgba(43,100,117,0.15)');
+  gradient.addColorStop(1, 'rgba(43,100,117,0.01)');
+
+  charts['chartPerformance'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: perf.dates,
+      datasets: [{
+        data: perf.prices,
+        borderColor: P.petrolDeep,
+        borderWidth: 1.5,
+        backgroundColor: gradient,
+        fill: true,
+        pointRadius: 0,
+        pointHitRadius: 8,
+        tension: 0.1,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: P.petrolDark,
+          titleFont: { family: "'Inter', sans-serif", size: 11 },
+          bodyFont: { family: "'Inter', sans-serif", size: 11 },
+          callbacks: {
+            title: ctx => {
+              const d = ctx[0].label ? new Date(ctx[0].label) : ctx[0].raw;
+              return typeof d === 'object' && d instanceof Date
+                ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+                : ctx[0].label;
+            },
+            label: ctx => 'Portfolio: ' + ctx.parsed.y.toFixed(2)
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'time',
+          time: {
+            unit: 'quarter',
+            displayFormats: { quarter: 'MMM yyyy' }
+          },
+          grid: { color: 'rgba(200,223,230,0.15)', drawBorder: false },
+          ticks: { font: { size: 10 }, color: P.inkLight, maxTicksLimit: 8 }
+        },
+        y: {
+          grid: { color: 'rgba(200,223,230,0.15)', drawBorder: false },
+          ticks: {
+            font: { size: 10 },
+            color: P.inkLight,
+            callback: v => v.toFixed(0)
+          }
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index'
+      }
+    }
+  });
+}
+
+// ── Render Everything ──
+function render() {
+  destroyCharts();
+
+  const equityHoldings = portfolio.filter(h => ETF_DB[h.ticker]?.assetClass === 'Equity');
+  const fiHoldings = portfolio.filter(h => ETF_DB[h.ticker]?.assetClass === 'Fixed Income');
+  const equityWeight = equityHoldings.reduce((s, h) => s + h.weight, 0);
+  const fiWeight = fiHoldings.reduce((s, h) => s + h.weight, 0);
+
+  // ── Hero Stats ──
+  document.getElementById('statHoldings').textContent = portfolio.length;
+  document.getElementById('statEquity').textContent = equityWeight + '%';
+  document.getElementById('statFI').textContent = fiWeight + '%';
+
+  // ── Weighted FI Duration ──
+  let wtdDuration = 0, wtdMaturity = 0, wtdYtm = 0;
+  fiHoldings.forEach(h => {
+    const etf = ETF_DB[h.ticker];
+    if (!etf) return;
+    const w = h.weight / fiWeight;
+    if (etf.duration) wtdDuration += w * etf.duration;
+    if (etf.maturity) wtdMaturity += w * etf.maturity;
+    if (etf.ytm) wtdYtm += w * etf.ytm;
+  });
+  document.getElementById('statDuration').textContent = wtdDuration.toFixed(1) + ' yr';
+  document.getElementById('metricDuration').textContent = wtdDuration.toFixed(2) + ' yr';
+  document.getElementById('metricMaturity').textContent = wtdMaturity.toFixed(2) + ' yr';
+  document.getElementById('metricYield').textContent = wtdYtm.toFixed(1) + '%';
+
+  // Weighted credit rating
+  const creditBlend = blend(fiHoldings, 'creditQuality');
+  const ratingScale = { 'AAA': 1, 'AA': 2, 'A': 3, 'BBB': 4, 'BB': 5, 'B': 6, 'CCC': 7 };
+  const ratingNames = ['AAA','AA+','AA','AA-','A+','A','A-','BBB+','BBB','BBB-','BB+','BB'];
+  let wtdRatingScore = 0;
+  Object.entries(creditBlend).forEach(([rating, pct]) => {
+    wtdRatingScore += (ratingScale[rating] || 4) * pct / 100;
+  });
+  const ratingIdx = Math.round((wtdRatingScore - 1) * 3);
+  const medianRating = ratingNames[Math.min(ratingIdx, ratingNames.length - 1)] || 'A';
+  document.getElementById('statCredit').textContent = medianRating;
+  document.getElementById('metricRating').textContent = medianRating;
+
+  // ── 1. Asset Allocation Donut ──
+  document.getElementById('allocCenterVal').textContent = equityWeight + ' / ' + fiWeight;
+  makeDoughnut('chartAllocation',
+    ['Equity', 'Fixed Income'],
+    [equityWeight, fiWeight],
+    [P.petrolDeep, P.petrolMid]
+  );
+
+  // ── Holdings Table ──
+  const tbody = document.querySelector('#holdingsTable tbody');
+  tbody.innerHTML = '';
+  portfolio.forEach(h => {
+    const etf = ETF_DB[h.ticker] || { name: h.ticker, assetClass: 'Unknown' };
+    const tr = document.createElement('tr');
+    const cls = etf.assetClass === 'Equity' ? 'tag-equity' : 'tag-fi';
+    tr.innerHTML = `
+      <td><strong>${h.ticker}</strong></td>
+      <td style="font-size:12px">${etf.name}</td>
+      <td><span class="tag ${cls}">${etf.assetClass}</span></td>
+      <td class="num"><strong>${h.weight}%</strong></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // ── 2. Equity Sector ──
+  if (equityHoldings.length) {
+    const sectorBlend = blend(equityHoldings, 'sectors');
+    const sorted = sortedEntries(sectorBlend);
+    makeBarChart('chartEqSector', sorted.map(s => s[0]), sorted.map(s => s[1]), P.petrolDeep);
+
+    // Equity Geo
+    const geoBlend = blend(equityHoldings, 'geography');
+    const geoSorted = sortedEntries(geoBlend).slice(0, 10);
+    makeBarChart('chartEqGeo', geoSorted.map(s => s[0]), geoSorted.map(s => s[1]), P.sageDeep);
+  }
+
+  // ── 3. Fixed Income ──
+  if (fiHoldings.length) {
+    // FI Sector
+    const fiSectorRaw = {};
+    fiHoldings.forEach(h => {
+      const etf = ETF_DB[h.ticker];
+      if (!etf) return;
+      if (etf.fiSubtype && etf.fiSubtype.startsWith('Government')) {
+        const label = etf.fiSubtype === 'Government (TIPS)' ? 'US TIPS' : 'US Treasury';
+        fiSectorRaw[label] = (fiSectorRaw[label] || 0) + h.weight;
+      } else if (etf.sectors) {
+        Object.entries(etf.sectors).forEach(([s, pct]) => {
+          fiSectorRaw[s] = (fiSectorRaw[s] || 0) + (h.weight * pct / 100);
+        });
+      }
+    });
+    const fiSectorSorted = sortedEntries(fiSectorRaw);
+    makeBarChart('chartFiSector',
+      fiSectorSorted.map(s => s[0]),
+      fiSectorSorted.map(s => +(s[1] / fiWeight * 100).toFixed(1)),
+      P.petrolMid
+    );
+
+    // FI Geography
+    const fiGeoBlend = blend(fiHoldings, 'geography');
+    const fiGeoSorted = sortedEntries(fiGeoBlend).slice(0, 10);
+    makeBarChart('chartFiGeo', fiGeoSorted.map(s => s[0]), fiGeoSorted.map(s => s[1]), P.strawDeep);
+
+    // Credit Quality
+    const creditOrder = ['AAA', 'AA', 'A', 'BBB', 'BB', 'B', 'CCC'];
+    const creditColors = [P.sageDeep, P.sage, P.petrolDeep, P.petrolMid, P.straw, P.blush, P.blushDeep];
+    const creditData = creditOrder.map(r => creditBlend[r] || 0).filter((_, i) => creditOrder[i]);
+    const creditLabels = creditOrder.filter((_, i) => creditData[i] > 0 || i < 4);
+    const creditVals = creditLabels.map(r => creditBlend[r] || 0);
+    makeVerticalBar('chartCredit', creditLabels, creditVals,
+      creditLabels.map((_, i) => creditColors[i % creditColors.length])
+    );
+
+    // Duration Distribution
+    const durationBuckets = { '0–2 yr': 0, '2–4 yr': 0, '4–6 yr': 0, '6–8 yr': 0, '8+ yr': 0 };
+    fiHoldings.forEach(h => {
+      const etf = ETF_DB[h.ticker];
+      if (!etf || !etf.duration) return;
+      const w = h.weight / fiWeight * 100;
+      const d = etf.duration;
+      if (d < 2) durationBuckets['0–2 yr'] += w;
+      else if (d < 4) durationBuckets['2–4 yr'] += w;
+      else if (d < 6) durationBuckets['4–6 yr'] += w;
+      else if (d < 8) durationBuckets['6–8 yr'] += w;
+      else durationBuckets['8+ yr'] += w;
+    });
+    const durLabels = Object.keys(durationBuckets);
+    const durData = Object.values(durationBuckets).map(v => +v.toFixed(1));
+    const durColors = [P.petrolLight, P.petrolMid, P.petrolDeep, P.petrolDark, P.ink];
+    makeVerticalBar('chartDuration', durLabels, durData, durColors);
+
+    // Maturity Profile
+    const matBuckets = { '0–2 yr': 0, '2–4 yr': 0, '4–6 yr': 0, '6–8 yr': 0, '8+ yr': 0 };
+    fiHoldings.forEach(h => {
+      const etf = ETF_DB[h.ticker];
+      if (!etf || !etf.maturity) return;
+      const w = h.weight / fiWeight * 100;
+      const m = etf.maturity;
+      if (m < 2) matBuckets['0–2 yr'] += w;
+      else if (m < 4) matBuckets['2–4 yr'] += w;
+      else if (m < 6) matBuckets['4–6 yr'] += w;
+      else if (m < 8) matBuckets['6–8 yr'] += w;
+      else matBuckets['8+ yr'] += w;
+    });
+    const matLabels = Object.keys(matBuckets);
+    const matData = Object.values(matBuckets).map(v => +v.toFixed(1));
+    const matColors = [P.sage, P.sageDeep, P.petrolMid, P.petrolDeep, P.petrolDark];
+    makeVerticalBar('chartMaturity', matLabels, matData, matColors);
+  }
+
+  // ── Performance Chart ──
+  renderPerformance();
+}
+
+// ── File Upload Handling ──
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  if (e.dataTransfer.files.length) handleFileUpload(e.dataTransfer.files[0]);
+});
+
+function handleFileUpload(file) {
+  if (!file) return;
+  const status = document.getElementById('uploadStatus');
+  status.textContent = 'Image uploaded: ' + file.name + '. Please enter the portfolio data manually from the image, or use the text input.';
+
+  // Show image preview in upload zone
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    dropZone.innerHTML = `
+      <img src="${e.target.result}" style="max-width:100%;max-height:200px;border-radius:8px;margin-bottom:1rem;">
+      <div class="upload-title" style="color:var(--sage-deep)">Image uploaded</div>
+      <div class="upload-desc">Enter the holdings from this image in the manual entry box, then click Generate Report.</div>
+      <div style="margin-top:1rem;">
+        <button class="btn btn-ghost" onclick="resetUpload()">Upload Different Image</button>
+      </div>
+    `;
+  };
+  reader.readAsDataURL(file);
+}
+
+function resetUpload() {
+  dropZone.innerHTML = `
+    <svg class="upload-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="6" y="10" width="36" height="28" rx="4"/>
+      <circle cx="18" cy="22" r="4"/>
+      <path d="M6 34 l12-10 8 6 10-12 6 8"/>
+    </svg>
+    <div class="upload-title">Drop portfolio image here</div>
+    <div class="upload-desc">Supports PNG, JPG, or screenshot of a portfolio table</div>
+    <div class="upload-or">or</div>
+    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+  `;
+}
+
+function handleManualEntry() {
+  const input = document.getElementById('manualInput').value.trim();
+  if (!input) return;
+
+  const status = document.getElementById('uploadStatus');
+  const spinner = document.getElementById('manualSpinner');
+  spinner.classList.add('active');
+  status.textContent = 'Processing portfolio...';
+
+  setTimeout(() => {
+    try {
+      const lines = input.split('\n').filter(l => l.trim());
+      const newPortfolio = [];
+      const unknownTickers = [];
+
+      lines.forEach(line => {
+        const parts = line.split(/[,\t;]+/).map(s => s.trim());
+        if (parts.length >= 2) {
+          const ticker = parts[0].toUpperCase().replace(/[^A-Z0-9]/g, '');
+          const weight = parseFloat(parts[1]);
+          if (ticker && !isNaN(weight) && weight > 0) {
+            newPortfolio.push({ ticker, weight });
+            if (!ETF_DB[ticker]) unknownTickers.push(ticker);
+          }
+        }
+      });
+
+      if (newPortfolio.length === 0) {
+        status.textContent = 'Could not parse any holdings. Use format: TICKER, Weight%';
+        spinner.classList.remove('active');
+        return;
+      }
+
+      portfolio = newPortfolio;
+
+      if (unknownTickers.length > 0) {
+        status.innerHTML = `<span style="color:var(--blush-deep)">Unknown tickers: ${unknownTickers.join(', ')}.</span> Known tickers have been rendered. Add unknown ETFs to the knowledge base to include them.`;
+      } else {
+        status.textContent = 'Portfolio updated with ' + newPortfolio.length + ' holdings.';
+        status.style.color = 'var(--sage-deep)';
+      }
+
+      render();
+      scrollToSection('#overview');
+    } catch (e) {
+      status.textContent = 'Error: ' + e.message;
+    }
+    spinner.classList.remove('active');
+  }, 400);
+}
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', render);
+</script>
+
+</body>
+</html>
