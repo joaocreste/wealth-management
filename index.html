@@ -470,6 +470,235 @@ section {
   margin-top: 2px;
 }
 
+/* ── HOLDINGS CARDS ── */
+.holdings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.holding-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 0.5px solid #ddeaed;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.holding-card:hover {
+  border-color: var(--petrol-mid);
+  box-shadow: 0 4px 16px rgba(43,100,117,0.1);
+  transform: translateY(-2px);
+}
+
+.holding-card-ticker {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.holding-card-name {
+  font-size: 11px;
+  color: var(--ink-light);
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  min-height: 30px;
+}
+
+.holding-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.holding-card-weight {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.holding-card-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 0 0 12px 12px;
+  transition: width 0.4s ease;
+}
+
+/* ── DETAIL MODAL ── */
+.detail-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(28,43,47,0.55);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.detail-overlay.active {
+  display: flex;
+}
+
+.detail-modal {
+  background: var(--white);
+  border-radius: 16px;
+  max-width: 780px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 0;
+  box-shadow: 0 24px 64px rgba(28,43,47,0.25);
+}
+
+.detail-header {
+  padding: 2rem 2.5rem 1.5rem;
+  border-bottom: 0.5px solid #eef3f4;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.detail-header-left {
+  flex: 1;
+}
+
+.detail-ticker {
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.detail-name {
+  font-size: 13px;
+  color: var(--ink-light);
+  margin-top: 4px;
+}
+
+.detail-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--off-white);
+  color: var(--ink-light);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.detail-close:hover {
+  background: #ddeaed;
+  color: var(--ink);
+}
+
+.detail-body {
+  padding: 1.5rem 2.5rem 2rem;
+}
+
+.detail-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 600px) {
+  .detail-metrics { grid-template-columns: repeat(2, 1fr); }
+}
+
+.detail-metric {
+  background: var(--off-white);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.detail-metric-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+
+.detail-metric-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.detail-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-section-title::after {
+  content: '';
+  flex: 1;
+  height: 0.5px;
+  background: #eef3f4;
+}
+
+.detail-chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .detail-chart-grid { grid-template-columns: 1fr; }
+}
+
+.detail-chart-box {
+  background: var(--off-white);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.detail-chart-box-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-light);
+  margin-bottom: 0.75rem;
+}
+
+.detail-chart-box canvas {
+  width: 100% !important;
+}
+
+.detail-description {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
 /* ── UPLOAD SECTION ── */
 .upload-zone {
   border: 2px dashed var(--petrol-light);
@@ -654,6 +883,7 @@ footer {
     <span class="nav-brand">JC Advisory <span>| Wealth Management</span></span>
   </div>
   <ul class="nav-links">
+    <li><a onclick="scrollToSection('#holdings')">Holdings</a></li>
     <li><a onclick="scrollToSection('#performance')">Performance</a></li>
     <li><a onclick="scrollToSection('#overview')">Overview</a></li>
     <li><a onclick="scrollToSection('#equity')">Equity</a></li>
@@ -692,6 +922,23 @@ footer {
       </div>
     </div>
   </div>
+</div>
+
+<!-- ═══════════ HOLDINGS ═══════════ -->
+<section id="holdings">
+  <div class="container">
+    <div class="section-label">Portfolio</div>
+    <div class="section-title">Holdings</div>
+    <div class="section-desc">Click on any holding to view its full characteristics and breakdown.</div>
+    <div class="holdings-grid" id="holdingsGrid"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Detail Modal ── -->
+<div class="detail-overlay" id="detailOverlay" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-modal" id="detailModal"></div>
 </div>
 
 <!-- ═══════════ PERFORMANCE ═══════════ -->
@@ -935,6 +1182,12 @@ const ETF_DB = {
   VUAA: {
     name: 'Vanguard S&P 500 UCITS (Acc)',
     assetClass: 'Equity',
+    description: 'Tracks the S&P 500 Index, providing exposure to 500 of the largest US companies. Accumulating share class — dividends are reinvested. One of the lowest-cost ways to access US large-cap equities via a UCITS-compliant vehicle.',
+    index: 'S&P 500',
+    ter: 0.07,
+    currency: 'USD',
+    domicile: 'Ireland',
+    replication: 'Physical (full)',
     sectors: {
       'Information Technology': 31.5, 'Financials': 13.5, 'Healthcare': 11.5,
       'Consumer Discretionary': 10.5, 'Communication Services': 9.0, 'Industrials': 8.5,
@@ -947,6 +1200,12 @@ const ETF_DB = {
   IUSQ: {
     name: 'iShares MSCI ACWI (Acc)',
     assetClass: 'Equity',
+    description: 'Tracks the MSCI All Country World Index, covering large and mid-cap stocks across 23 developed and 24 emerging markets. Provides broad global equity exposure in a single fund with accumulating share class.',
+    index: 'MSCI ACWI',
+    ter: 0.20,
+    currency: 'USD',
+    domicile: 'Ireland',
+    replication: 'Optimised sampling',
     sectors: {
       'Information Technology': 25.5, 'Financials': 16.5, 'Healthcare': 11.0,
       'Consumer Discretionary': 11.0, 'Industrials': 10.5, 'Communication Services': 8.0,
@@ -963,6 +1222,8 @@ const ETF_DB = {
   CSPX: {
     name: 'iShares Core S&P 500 UCITS (Acc)',
     assetClass: 'Equity',
+    description: 'Tracks the S&P 500 Index via full physical replication. Accumulating share class with very low TER. Core building block for US equity exposure.',
+    index: 'S&P 500', ter: 0.07, currency: 'USD', domicile: 'Ireland', replication: 'Physical (full)',
     sectors: {
       'Information Technology': 31.5, 'Financials': 13.5, 'Healthcare': 11.5,
       'Consumer Discretionary': 10.5, 'Communication Services': 9.0, 'Industrials': 8.5,
@@ -975,6 +1236,8 @@ const ETF_DB = {
   VWCE: {
     name: 'Vanguard FTSE All-World UCITS (Acc)',
     assetClass: 'Equity',
+    description: 'Tracks the FTSE All-World Index covering over 4,000 stocks across developed and emerging markets. Accumulating, physically replicated with optimised sampling.',
+    index: 'FTSE All-World', ter: 0.22, currency: 'USD', domicile: 'Ireland', replication: 'Optimised sampling',
     sectors: {
       'Information Technology': 25.0, 'Financials': 16.0, 'Healthcare': 11.0,
       'Consumer Discretionary': 11.0, 'Industrials': 11.0, 'Communication Services': 7.5,
@@ -992,6 +1255,8 @@ const ETF_DB = {
   IBCS: {
     name: 'iShares EUR Corp Bond Large Cap (Dist)',
     assetClass: 'Fixed Income',
+    description: 'Tracks the iBoxx EUR Liquid Corporates Large Cap Index, providing exposure to EUR-denominated investment grade corporate bonds from large issuers. Distributing share class — pays quarterly coupons.',
+    index: 'iBoxx EUR Liquid Corporates Large Cap', ter: 0.20, currency: 'EUR', domicile: 'Ireland', replication: 'Optimised sampling',
     fiSubtype: 'Corporate',
     sectors: {
       'Banking': 38, 'Insurance': 8, 'Utilities': 8, 'Telecommunications': 8,
@@ -1010,6 +1275,8 @@ const ETF_DB = {
   SXRH: {
     name: 'iShares TIPS 0-5 UCITS ETF USD',
     assetClass: 'Fixed Income',
+    description: 'Tracks the Bloomberg US Government Inflation-Linked 0-5 Year Index. Provides exposure to short-duration US Treasury Inflation-Protected Securities, offering a real return plus inflation adjustment.',
+    index: 'Bloomberg US TIPS 0-5Y', ter: 0.10, currency: 'USD', domicile: 'Ireland', replication: 'Physical (full)',
     fiSubtype: 'Government (TIPS)',
     sectors: { 'US TIPS (Inflation-Linked)': 100 },
     geography: { 'United States': 100 },
@@ -1020,6 +1287,8 @@ const ETF_DB = {
   SYBW: {
     name: 'SPDR Bloomberg 1-3Y US Treasury',
     assetClass: 'Fixed Income',
+    description: 'Tracks the Bloomberg 1-3 Year US Treasury Bond Index. Provides exposure to short-maturity US government bonds, offering low duration risk and high credit quality. Distributing share class.',
+    index: 'Bloomberg 1-3Y US Treasury', ter: 0.15, currency: 'USD', domicile: 'Ireland', replication: 'Physical (full)',
     fiSubtype: 'Government (Treasury)',
     sectors: { 'US Treasury': 100 },
     geography: { 'United States': 100 },
@@ -1030,6 +1299,8 @@ const ETF_DB = {
   AGGH: {
     name: 'iShares Core Global Aggregate Bond',
     assetClass: 'Fixed Income',
+    description: 'Tracks the Bloomberg Global Aggregate Bond Index (EUR hedged). Broad exposure to global investment grade government and corporate bonds.',
+    index: 'Bloomberg Global Aggregate', ter: 0.10, currency: 'EUR', domicile: 'Ireland', replication: 'Optimised sampling',
     fiSubtype: 'Aggregate',
     sectors: {
       'Government': 50, 'Securitized': 14, 'Corporate': 18,
@@ -1046,6 +1317,8 @@ const ETF_DB = {
   IEAG: {
     name: 'iShares Core EUR Govt Bond',
     assetClass: 'Fixed Income',
+    description: 'Tracks the Bloomberg Euro Treasury Bond Index. Exposure to EUR-denominated government bonds across all maturities from eurozone sovereigns.',
+    index: 'Bloomberg Euro Treasury', ter: 0.09, currency: 'EUR', domicile: 'Ireland', replication: 'Optimised sampling',
     fiSubtype: 'Government',
     sectors: { 'Euro Government Bonds': 100 },
     geography: {
@@ -1222,6 +1495,7 @@ function makeVerticalBar(canvasId, labels, data, colors, annotation) {
 // ── Performance Simulation ──
 // Expected annual returns & volatilities per ETF (reasonable estimates)
 const ETF_PARAMS = {
+  _MSCI_WORLD: { annRet: 0.11, annVol: 0.15 }, // MSCI World benchmark
   VUAA: { annRet: 0.12, annVol: 0.16 },   // S&P 500
   IUSQ: { annRet: 0.10, annVol: 0.14 },   // MSCI ACWI
   CSPX: { annRet: 0.12, annVol: 0.16 },   // S&P 500
@@ -1254,7 +1528,10 @@ function normalRandom(rng) {
 function generatePerformanceData(holdings) {
   const startDate = new Date(2023, 0, 2); // Jan 2, 2023
   const endDate = new Date(2026, 3, 10);  // Apr 10, 2026
-  const rng = mulberry32(42);
+  // Derive seed from ticker names for reproducible but distinct paths
+  let seed = 42;
+  holdings.forEach(h => { for (let i = 0; i < h.ticker.length; i++) seed = seed * 31 + h.ticker.charCodeAt(i); });
+  const rng = mulberry32(seed & 0x7FFFFFFF);
 
   // Generate daily dates (skip weekends)
   const dates = [];
@@ -1333,6 +1610,9 @@ function renderPerformance() {
 
   const perf = generatePerformanceData(portfolio);
 
+  // Generate MSCI World benchmark (seed 99 for distinct path)
+  const msciWorld = generatePerformanceData([{ ticker: '_MSCI_WORLD', weight: 100 }]);
+
   // Update metric cards
   const fmt = (v, decimals = 1) => (v >= 0 ? '+' : '') + v.toFixed(decimals) + '%';
   const cls = v => v >= 0 ? 'positive' : 'negative';
@@ -1363,34 +1643,59 @@ function renderPerformance() {
     type: 'line',
     data: {
       labels: perf.dates,
-      datasets: [{
-        data: perf.prices,
-        borderColor: P.petrolDeep,
-        borderWidth: 1.5,
-        backgroundColor: gradient,
-        fill: true,
-        pointRadius: 0,
-        pointHitRadius: 8,
-        tension: 0.1,
-      }]
+      datasets: [
+        {
+          label: 'Portfolio',
+          data: perf.prices,
+          borderColor: P.petrolDeep,
+          borderWidth: 1.5,
+          backgroundColor: gradient,
+          fill: true,
+          pointRadius: 0,
+          pointHitRadius: 8,
+          tension: 0.1,
+        },
+        {
+          label: 'MSCI World',
+          data: msciWorld.prices,
+          borderColor: '#C8A85C',
+          borderWidth: 1.5,
+          borderDash: [6, 3],
+          backgroundColor: 'transparent',
+          fill: false,
+          pointRadius: 0,
+          pointHitRadius: 8,
+          tension: 0.1,
+        }
+      ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: true,
+          position: 'top',
+          align: 'end',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'line',
+            padding: 16,
+            font: { family: "'Inter', sans-serif", size: 10 },
+            color: P.inkLight,
+          }
+        },
         tooltip: {
           backgroundColor: P.petrolDark,
           titleFont: { family: "'Inter', sans-serif", size: 11 },
           bodyFont: { family: "'Inter', sans-serif", size: 11 },
           callbacks: {
-            title: ctx => {
-              const d = ctx[0].label ? new Date(ctx[0].label) : ctx[0].raw;
-              return typeof d === 'object' && d instanceof Date
-                ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
-                : ctx[0].label;
+            title: items => {
+              const ts = items[0].parsed.x;
+              const d = new Date(ts);
+              return isNaN(d.getTime()) ? '' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
             },
-            label: ctx => 'Portfolio: ' + ctx.parsed.y.toFixed(2)
+            label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2)
           }
         }
       },
@@ -1421,9 +1726,279 @@ function renderPerformance() {
   });
 }
 
+// ── Holdings Grid + Detail Modal ──
+let detailCharts = {};
+
+function renderHoldingsGrid() {
+  const grid = document.getElementById('holdingsGrid');
+  grid.innerHTML = '';
+
+  portfolio.forEach(h => {
+    const etf = ETF_DB[h.ticker];
+    if (!etf) return;
+    const isEq = etf.assetClass === 'Equity';
+    const barColor = isEq ? P.petrolDeep : P.petrolMid;
+    const tagCls = isEq ? 'tag-equity' : 'tag-fi';
+
+    const card = document.createElement('div');
+    card.className = 'holding-card';
+    card.onclick = () => openDetail(h.ticker, h.weight);
+    card.innerHTML = `
+      <div class="holding-card-ticker">${h.ticker}</div>
+      <div class="holding-card-name">${etf.name}</div>
+      <div class="holding-card-row">
+        <span class="tag ${tagCls}">${etf.assetClass}</span>
+        <span class="holding-card-weight">${h.weight}%</span>
+      </div>
+      <div class="holding-card-bar" style="width:${h.weight * 2.5}%;background:${barColor}"></div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openDetail(ticker, weight) {
+  const etf = ETF_DB[ticker];
+  if (!etf) return;
+  const params = ETF_PARAMS[ticker] || { annRet: 0.05, annVol: 0.10 };
+  const isEq = etf.assetClass === 'Equity';
+  const tagCls = isEq ? 'tag-equity' : 'tag-fi';
+
+  // Destroy any previous detail charts
+  Object.values(detailCharts).forEach(c => c && c.destroy());
+  detailCharts = {};
+
+  const modal = document.getElementById('detailModal');
+  let metricsHTML = '';
+
+  // Build metrics row
+  const metricItems = [
+    { label: 'Weight', value: weight + '%' },
+    { label: 'Asset Class', value: etf.assetClass },
+    { label: 'TER', value: etf.ter ? (etf.ter < 1 ? etf.ter.toFixed(2) + '%' : etf.ter + '%') : '—' },
+    { label: 'Currency', value: etf.currency || '—' },
+  ];
+
+  if (etf.duration) metricItems.push({ label: 'Eff. Duration', value: etf.duration.toFixed(1) + ' yr' });
+  if (etf.maturity) metricItems.push({ label: 'Avg. Maturity', value: etf.maturity.toFixed(1) + ' yr' });
+  if (etf.ytm) metricItems.push({ label: 'Yield (YTM)', value: etf.ytm.toFixed(1) + '%' });
+  metricItems.push({ label: 'Exp. Ann. Return', value: (params.annRet * 100).toFixed(1) + '%' });
+  if (!etf.duration) metricItems.push({ label: 'Ann. Volatility', value: (params.annVol * 100).toFixed(1) + '%' });
+
+  // Extra info
+  const infoItems = [];
+  if (etf.index) infoItems.push({ label: 'Index', value: etf.index });
+  if (etf.domicile) infoItems.push({ label: 'Domicile', value: etf.domicile });
+  if (etf.replication) infoItems.push({ label: 'Replication', value: etf.replication });
+  if (etf.fiSubtype) infoItems.push({ label: 'Sub-type', value: etf.fiSubtype });
+
+  modal.innerHTML = `
+    <div class="detail-header">
+      <div class="detail-header-left">
+        <div class="detail-ticker">
+          ${ticker}
+          <span class="tag ${tagCls}" style="font-size:11px">${etf.assetClass}</span>
+        </div>
+        <div class="detail-name">${etf.name}</div>
+      </div>
+      <button class="detail-close" onclick="closeDetail()">&times;</button>
+    </div>
+    <div class="detail-body">
+      ${etf.description ? '<div class="detail-description">' + etf.description + '</div>' : ''}
+
+      <div class="detail-metrics">
+        ${metricItems.map(m => `
+          <div class="detail-metric">
+            <div class="detail-metric-label">${m.label}</div>
+            <div class="detail-metric-value">${m.value}</div>
+          </div>
+        `).join('')}
+      </div>
+
+      ${infoItems.length ? `
+        <div class="detail-metrics" style="margin-bottom:1rem;">
+          ${infoItems.map(m => `
+            <div class="detail-metric">
+              <div class="detail-metric-label">${m.label}</div>
+              <div class="detail-metric-value" style="font-size:13px">${m.value}</div>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+
+      <div class="detail-section-title">Simulated Performance</div>
+      <div style="height:200px;margin-bottom:1.5rem;">
+        <canvas id="detailPerfChart"></canvas>
+      </div>
+
+      <div class="detail-section-title">Breakdown</div>
+      <div class="detail-chart-grid">
+        ${etf.sectors ? `
+          <div class="detail-chart-box">
+            <div class="detail-chart-box-title">Sector Exposure</div>
+            <div style="height:${Math.max(160, Object.keys(etf.sectors).length * 24)}px">
+              <canvas id="detailSectorChart"></canvas>
+            </div>
+          </div>
+        ` : ''}
+        ${etf.geography ? `
+          <div class="detail-chart-box">
+            <div class="detail-chart-box-title">Geographic Exposure</div>
+            <div style="height:${Math.max(160, Object.keys(etf.geography).length * 24)}px">
+              <canvas id="detailGeoChart"></canvas>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+
+      ${etf.creditQuality ? `
+        <div class="detail-chart-grid" style="margin-top:1rem">
+          <div class="detail-chart-box">
+            <div class="detail-chart-box-title">Credit Quality</div>
+            <div style="height:180px">
+              <canvas id="detailCreditChart"></canvas>
+            </div>
+          </div>
+        </div>
+      ` : ''}
+    </div>
+  `;
+
+  document.getElementById('detailOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Render detail charts after DOM update
+  requestAnimationFrame(() => renderDetailCharts(ticker, weight));
+}
+
+function renderDetailCharts(ticker, weight) {
+  const etf = ETF_DB[ticker];
+  const params = ETF_PARAMS[ticker] || { annRet: 0.05, annVol: 0.10 };
+
+  // 1. Performance mini-chart
+  const perfData = generatePerformanceData([{ ticker, weight: 100 }]);
+  const ctx = document.getElementById('detailPerfChart');
+  if (ctx) {
+    const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 200);
+    gradient.addColorStop(0, 'rgba(43,100,117,0.12)');
+    gradient.addColorStop(1, 'rgba(43,100,117,0.01)');
+
+    detailCharts['perf'] = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: perfData.dates,
+        datasets: [{
+          data: perfData.prices,
+          borderColor: P.petrolDeep,
+          borderWidth: 1.5,
+          backgroundColor: gradient,
+          fill: true,
+          pointRadius: 0,
+          tension: 0.1,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: {
+          x: { type: 'time', time: { unit: 'quarter', displayFormats: { quarter: 'MMM yy' } },
+            grid: { display: false }, ticks: { font: { size: 9 }, color: P.inkLight, maxTicksLimit: 6 } },
+          y: { grid: { color: 'rgba(200,223,230,0.15)' },
+            ticks: { font: { size: 9 }, color: P.inkLight, callback: v => v.toFixed(0) } }
+        }
+      }
+    });
+  }
+
+  // 2. Sector chart
+  if (etf.sectors) {
+    const sorted = sortedEntries(etf.sectors);
+    const el = document.getElementById('detailSectorChart');
+    if (el) {
+      detailCharts['sector'] = new Chart(el, {
+        type: 'bar',
+        data: {
+          labels: sorted.map(s => s[0]),
+          datasets: [{ data: sorted.map(s => s[1]), backgroundColor: P.petrolDeep, borderRadius: 3, barPercentage: 0.65 }]
+        },
+        options: {
+          indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x.toFixed(1) + '%' } } },
+          scales: {
+            x: { grid: { color: 'rgba(200,223,230,0.15)' }, ticks: { callback: v => v + '%', font: { size: 9 } } },
+            y: { grid: { display: false }, ticks: { font: { size: 9 } } }
+          }
+        }
+      });
+    }
+  }
+
+  // 3. Geography chart
+  if (etf.geography) {
+    const sorted = sortedEntries(etf.geography);
+    const el = document.getElementById('detailGeoChart');
+    if (el) {
+      detailCharts['geo'] = new Chart(el, {
+        type: 'bar',
+        data: {
+          labels: sorted.map(s => s[0]),
+          datasets: [{ data: sorted.map(s => s[1]), backgroundColor: P.sageDeep, borderRadius: 3, barPercentage: 0.65 }]
+        },
+        options: {
+          indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x.toFixed(1) + '%' } } },
+          scales: {
+            x: { grid: { color: 'rgba(200,223,230,0.15)' }, ticks: { callback: v => v + '%', font: { size: 9 } } },
+            y: { grid: { display: false }, ticks: { font: { size: 9 } } }
+          }
+        }
+      });
+    }
+  }
+
+  // 4. Credit quality chart
+  if (etf.creditQuality) {
+    const order = ['AAA', 'AA', 'A', 'BBB', 'BB', 'B', 'CCC'];
+    const colors = [P.sageDeep, P.sage, P.petrolDeep, P.petrolMid, P.straw, P.blush, P.blushDeep];
+    const labels = order.filter(r => etf.creditQuality[r]);
+    const data = labels.map(r => etf.creditQuality[r]);
+    const el = document.getElementById('detailCreditChart');
+    if (el) {
+      detailCharts['credit'] = new Chart(el, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{ data, backgroundColor: labels.map((_, i) => colors[i]), borderRadius: 3, barPercentage: 0.55 }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y.toFixed(1) + '%' } } },
+          scales: {
+            y: { grid: { color: 'rgba(200,223,230,0.15)' }, ticks: { callback: v => v + '%', font: { size: 9 } } },
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+          }
+        }
+      });
+    }
+  }
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+  Object.values(detailCharts).forEach(c => c && c.destroy());
+  detailCharts = {};
+}
+
+// Close on Escape key
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
 // ── Render Everything ──
 function render() {
   destroyCharts();
+
+  // ── Holdings Grid ──
+  renderHoldingsGrid();
 
   const equityHoldings = portfolio.filter(h => ETF_DB[h.ticker]?.assetClass === 'Equity');
   const fiHoldings = portfolio.filter(h => ETF_DB[h.ticker]?.assetClass === 'Fixed Income');
