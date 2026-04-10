@@ -5,38 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JC Advisory — Portfolio Report</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,600;1,300&family=Mulish:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <style>
 :root {
-  --petrol-light: #C8DFE6;
-  --petrol-mid: #8BBFC9;
-  --petrol-deep: #2B6475;
-  --petrol-dark: #1C2B2F;
-  --blush: #F4C5C5;
-  --blush-deep: #9B3535;
-  --straw: #F5E6C0;
-  --straw-deep: #7C5B15;
-  --sage: #C9E8D5;
-  --sage-deep: #286B46;
+  --navy: #0D1B2A;
+  --slate: #1E2D3D;
+  --gold: #B8954A;
+  --gold-pale: #E5D4A8;
+  --steel: #7A8FA6;
+  --offwhite: #F9F7F4;
+  --cream: #F0EDE6;
   --white: #ffffff;
-  --off-white: #F4F8F9;
-  --ink: #1C2B2F;
-  --ink-mid: #2B6475;
-  --ink-light: #6B8C96;
+  /* Legacy aliases for JS */
+  --ink: #0D1B2A;
+  --ink-light: #7A8FA6;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  color: var(--ink);
-  background: var(--off-white);
-  line-height: 1.7;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 300;
+  color: var(--navy);
+  background: var(--offwhite);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── GLOBAL GOLD BAR ── */
+body::before {
+  content: '';
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gold);
+  z-index: 400;
 }
 
 /* ── NAV ── */
@@ -44,11 +52,12 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: #0F1A1D;
-  backdrop-filter: blur(12px);
-  border-bottom: 0.5px solid rgba(200,180,120,0.15);
-  padding: 0 3rem;
-  height: 56px;
+  background: rgba(13, 27, 42, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 0.5px solid rgba(255,255,255,0.04);
+  padding: 0 clamp(24px, 5vw, 80px);
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -57,43 +66,59 @@ nav {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .nav-logo svg { width: 28px; height: 28px; }
 
 .nav-brand {
-  font-family: 'Outfit', sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  color: #EEF6F8;
-  letter-spacing: -0.3px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--cream);
+}
+
+.nav-brand .amp {
+  color: var(--gold);
 }
 
 .nav-brand span {
   font-weight: 300;
-  color: rgba(200,223,230,0.5);
+  color: var(--steel);
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 28px;
   list-style: none;
 }
 
 .nav-links a {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 10px;
   font-weight: 400;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #C8A85C;
+  color: var(--steel);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.3s;
   cursor: pointer;
+  position: relative;
 }
 
-.nav-links a:hover { color: #E8C872; }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--cream); }
+.nav-links a:hover::after { width: 100%; }
 
 /* ── LANG SWITCHER ── */
 .lang-switcher {
@@ -102,7 +127,7 @@ nav {
   gap: 6px;
   margin-left: 1.5rem;
   padding-left: 1.5rem;
-  border-left: 1px solid rgba(200,180,120,0.15);
+  border-left: 1px solid rgba(255,255,255,0.08);
 }
 
 .lang-btn {
@@ -111,32 +136,27 @@ nav {
   border-radius: 2px;
   border: none;
   cursor: pointer;
-  opacity: 0.45;
+  opacity: 0.4;
   transition: opacity 0.2s;
   padding: 0;
   background: none;
   overflow: hidden;
 }
 
-.lang-btn:hover { opacity: 0.75; }
+.lang-btn:hover { opacity: 0.7; }
 .lang-btn.active { opacity: 1; }
 
 /* ── HERO ── */
 .hero {
-  padding: 80px 3rem 2rem;
-  background: var(--petrol-dark);
-  color: #EEF6F8;
+  padding: 100px clamp(28px, 5vw, 80px) 2.5rem;
+  background: var(--navy);
+  color: var(--cream);
   position: relative;
   overflow: hidden;
 }
 
 .hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(200,223,230,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,223,230,0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+  display: none;
 }
 
 .hero-content {
@@ -144,62 +164,78 @@ nav {
   z-index: 2;
   max-width: 1120px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .hero-eyebrow {
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.14em;
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--petrol-mid);
-  margin-bottom: 1rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
 }
 
 .hero h1 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 36px;
-  font-weight: 500;
-  letter-spacing: -0.5px;
+  font-family: 'Raleway', sans-serif;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
   margin-bottom: 0.5rem;
 }
 
+.hero-divider {
+  width: 48px; height: 1px;
+  background: var(--gold);
+  margin: 1.25rem auto;
+}
+
 .hero-sub {
-  font-size: 14px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 13px;
   font-weight: 300;
-  color: rgba(200,223,230,0.55);
+  color: var(--steel);
 }
 
 .hero-stats {
   display: flex;
   gap: 3rem;
   margin-top: 2rem;
+  justify-content: center;
+  text-align: center;
 }
 
 .hero-stat {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .hero-stat-label {
-  font-size: 10px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--petrol-mid);
+  letter-spacing: 0.2em;
+  color: var(--steel);
   margin-bottom: 4px;
 }
 
 .hero-stat-value {
-  font-family: 'Outfit', sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-  color: #EEF6F8;
+  font-family: 'Raleway', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--cream);
 }
 
 /* ── SECTIONS ── */
 .container {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 0 clamp(24px, 5vw, 80px);
 }
 
 section {
@@ -207,64 +243,68 @@ section {
 }
 
 .section-label {
-  font-size: 10px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--petrol-deep);
+  color: var(--gold);
   margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .section-label::after {
-  content: '';
-  display: block;
-  height: 0.5px;
-  width: 40px;
-  background: var(--petrol-light);
+  display: none;
 }
 
 .section-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 28px;
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: -0.3px;
+  font-family: 'Raleway', sans-serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 200;
+  color: var(--navy);
+  letter-spacing: 0.04em;
+  line-height: 1.15;
   margin-bottom: 0.25rem;
 }
 
 .section-desc {
+  font-family: 'Mulish', sans-serif;
   font-size: 13px;
-  color: var(--ink-light);
+  font-weight: 300;
+  color: var(--steel);
   max-width: 520px;
-  line-height: 1.7;
+  line-height: 1.75;
   margin-bottom: 1.5rem;
 }
 
 /* ── CARDS ── */
 .card {
   background: var(--white);
-  border-radius: 12px;
-  border: 0.5px solid #ddeaed;
+  border-radius: 4px;
+  border: 0.5px solid rgba(0,0,0,0.08);
   padding: 1.5rem;
   margin-bottom: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(184,149,74,0.3);
 }
 
 .card-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 1.5rem;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--navy);
+  margin-bottom: 1.25rem;
 }
 
 .card-subtitle {
-  font-size: 11px;
-  color: var(--ink-light);
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
+  color: var(--steel);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   margin-bottom: 0.5rem;
 }
 
@@ -297,20 +337,24 @@ section {
 }
 
 .data-table thead th {
-  font-size: 10px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-light);
+  letter-spacing: 0.16em;
+  color: var(--steel);
   padding: 8px 12px;
   text-align: left;
-  border-bottom: 1px solid #ddeaed;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
 }
 
 .data-table tbody td {
+  font-family: 'Mulish', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
   padding: 10px 12px;
-  border-bottom: 0.5px solid #eef3f4;
-  color: var(--ink);
+  border-bottom: 0.5px solid rgba(0,0,0,0.05);
+  color: var(--navy);
 }
 
 .data-table tbody tr:last-child td {
@@ -324,16 +368,17 @@ section {
 
 .tag {
   display: inline-block;
-  font-size: 10px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 4px;
+  padding: 4px 10px;
+  border-radius: 0;
 }
 
-.tag-equity { background: rgba(43,100,117,0.1); color: var(--petrol-deep); }
-.tag-fi { background: rgba(139,191,201,0.2); color: var(--petrol-deep); }
+.tag-equity { background: transparent; color: var(--gold); border: 0.5px solid rgba(184,149,74,0.35); }
+.tag-fi { background: transparent; color: var(--steel); border: 0.5px solid rgba(122,143,166,0.35); }
 
 /* ── CHART CONTAINERS ── */
 .chart-wrap {
@@ -359,17 +404,19 @@ section {
 }
 
 .donut-center-value {
-  font-family: 'Outfit', sans-serif;
-  font-size: 28px;
-  font-weight: 500;
-  color: var(--ink);
+  font-family: 'Raleway', sans-serif;
+  font-size: 24px;
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  color: var(--navy);
 }
 
 .donut-center-label {
-  font-size: 10px;
-  color: var(--ink-light);
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
+  color: var(--steel);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
 }
 
 /* ── METRIC PILLS ── */
@@ -381,31 +428,37 @@ section {
 }
 
 .metric-pill {
-  background: var(--off-white);
-  border-radius: 8px;
+  background: var(--white);
+  border: 0.5px solid rgba(0,0,0,0.08);
+  border-radius: 4px;
   padding: 1rem 1.25rem;
   flex: 1;
   min-width: 140px;
 }
 
 .metric-pill-label {
-  font-size: 10px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-light);
+  letter-spacing: 0.16em;
+  color: var(--steel);
   margin-bottom: 4px;
 }
 
 .metric-pill-value {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 22px;
-  font-weight: 500;
-  color: var(--ink);
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  color: var(--navy);
 }
 
 .metric-pill-note {
+  font-family: 'Mulish', sans-serif;
   font-size: 10px;
-  color: var(--ink-light);
+  font-weight: 300;
+  color: var(--steel);
   margin-top: 2px;
 }
 
@@ -445,8 +498,8 @@ section {
 
 .perf-chart-card {
   background: var(--white);
-  border-radius: 12px;
-  border: 0.5px solid #ddeaed;
+  border-radius: 4px;
+  border: 0.5px solid rgba(0,0,0,0.08);
   padding: 1.5rem 2rem 1rem;
 }
 
@@ -463,8 +516,8 @@ section {
 
 .perf-metric-card {
   background: var(--white);
-  border-radius: 12px;
-  border: 0.5px solid #ddeaed;
+  border-radius: 4px;
+  border: 0.5px solid rgba(0,0,0,0.08);
   padding: 1.25rem 1.5rem;
   flex: 1;
   display: flex;
@@ -473,26 +526,31 @@ section {
 }
 
 .perf-metric-label {
-  font-size: 10px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-light);
+  letter-spacing: 0.16em;
+  color: var(--steel);
   margin-bottom: 4px;
 }
 
 .perf-metric-value {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 24px;
-  font-weight: 500;
-  color: var(--ink);
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  color: var(--navy);
 }
 
-.perf-metric-value.positive { color: var(--sage-deep); }
-.perf-metric-value.negative { color: var(--blush-deep); }
+.perf-metric-value.positive { color: #2D6A4F; }
+.perf-metric-value.negative { color: #9B2226; }
 
 .perf-metric-sub {
+  font-family: 'Mulish', sans-serif;
   font-size: 10px;
-  color: var(--ink-light);
+  font-weight: 300;
+  color: var(--steel);
   margin-top: 2px;
 }
 
@@ -505,32 +563,34 @@ section {
 
 .holding-card {
   background: var(--white);
-  border-radius: 12px;
-  border: 0.5px solid #ddeaed;
+  border-radius: 4px;
+  border: 0.5px solid rgba(0,0,0,0.08);
   padding: 1.25rem 1.5rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
 .holding-card:hover {
-  border-color: var(--petrol-mid);
-  box-shadow: 0 4px 16px rgba(43,100,117,0.1);
-  transform: translateY(-2px);
+  border-color: rgba(184,149,74,0.4);
+  background: rgba(184,149,74,0.02);
 }
 
 .holding-card-ticker {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 20px;
-  font-weight: 600;
-  color: var(--ink);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--navy);
   margin-bottom: 2px;
 }
 
 .holding-card-name {
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
-  color: var(--ink-light);
+  font-weight: 300;
+  color: var(--steel);
   line-height: 1.4;
   margin-bottom: 0.75rem;
   min-height: 30px;
@@ -543,18 +603,18 @@ section {
 }
 
 .holding-card-weight {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 18px;
-  font-weight: 500;
-  color: var(--ink);
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  color: var(--navy);
 }
 
 .holding-card-bar {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 3px;
-  border-radius: 0 0 12px 12px;
+  height: 2px;
   transition: width 0.4s ease;
 }
 
@@ -563,8 +623,9 @@ section {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(28,43,47,0.55);
-  backdrop-filter: blur(8px);
+  background: rgba(13,27,42,0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 200;
   align-items: center;
   justify-content: center;
@@ -576,8 +637,8 @@ section {
 }
 
 .detail-modal {
-  background: var(--white);
-  border-radius: 16px;
+  background: var(--offwhite);
+  border-radius: 4px;
   max-width: 780px;
   width: 100%;
   max-height: 85vh;
@@ -599,18 +660,21 @@ section {
 }
 
 .detail-ticker {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 28px;
-  font-weight: 600;
-  color: var(--ink);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--navy);
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
 .detail-name {
+  font-family: 'Mulish', sans-serif;
   font-size: 13px;
-  color: var(--ink-light);
+  font-weight: 300;
+  color: var(--steel);
   margin-top: 4px;
 }
 
@@ -619,8 +683,8 @@ section {
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: var(--off-white);
-  color: var(--ink-light);
+  background: rgba(0,0,0,0.04);
+  color: var(--steel);
   font-size: 18px;
   cursor: pointer;
   display: flex;
@@ -651,31 +715,36 @@ section {
 }
 
 .detail-metric {
-  background: var(--off-white);
-  border-radius: 8px;
+  background: var(--white);
+  border: 0.5px solid rgba(0,0,0,0.06);
+  border-radius: 4px;
   padding: 0.75rem 1rem;
 }
 
 .detail-metric-label {
+  font-family: 'Mulish', sans-serif;
   font-size: 9px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-light);
+  letter-spacing: 0.14em;
+  color: var(--steel);
   margin-bottom: 4px;
 }
 
 .detail-metric-value {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 18px;
-  font-weight: 500;
-  color: var(--ink);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--navy);
 }
 
 .detail-section-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--navy);
   margin-bottom: 0.75rem;
   margin-top: 1.5rem;
   display: flex;
@@ -701,16 +770,19 @@ section {
 }
 
 .detail-chart-box {
-  background: var(--off-white);
-  border-radius: 10px;
+  background: var(--white);
+  border: 0.5px solid rgba(0,0,0,0.06);
+  border-radius: 4px;
   padding: 1rem 1.25rem;
 }
 
 .detail-chart-box-title {
-  font-size: 10px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ink-light);
+  letter-spacing: 0.14em;
+  color: var(--steel);
   margin-bottom: 0.75rem;
 }
 
@@ -719,16 +791,18 @@ section {
 }
 
 .detail-description {
+  font-family: 'Mulish', sans-serif;
   font-size: 13px;
-  color: var(--ink-light);
-  line-height: 1.7;
+  font-weight: 300;
+  color: var(--steel);
+  line-height: 1.85;
   margin-bottom: 1.5rem;
 }
 
 /* ── UPLOAD SECTION ── */
 .upload-zone {
-  border: 2px dashed var(--petrol-light);
-  border-radius: 12px;
+  border: 1px dashed rgba(184,149,74,0.35);
+  border-radius: 4px;
   padding: 3rem 2rem;
   text-align: center;
   cursor: pointer;
@@ -737,73 +811,82 @@ section {
 }
 
 .upload-zone:hover {
-  border-color: var(--petrol-mid);
-  background: var(--off-white);
+  border-color: var(--gold);
+  background: rgba(184,149,74,0.02);
 }
 
 .upload-zone.dragover {
-  border-color: var(--petrol-deep);
-  background: rgba(43,100,117,0.05);
+  border-color: var(--gold);
+  background: rgba(184,149,74,0.04);
 }
 
 .upload-icon {
   width: 48px;
   height: 48px;
   margin: 0 auto 1rem;
-  color: var(--petrol-mid);
+  color: var(--steel);
 }
 
 .upload-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 16px;
-  font-weight: 500;
-  color: var(--ink);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--navy);
   margin-bottom: 0.5rem;
 }
 
 .upload-desc {
+  font-family: 'Mulish', sans-serif;
   font-size: 12px;
-  color: var(--ink-light);
+  font-weight: 300;
+  color: var(--steel);
 }
 
 .upload-or {
   margin: 1rem 0;
-  font-size: 11px;
-  color: var(--ink-light);
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--steel);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
 }
 
 .btn {
   display: inline-block;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  padding: 10px 24px;
-  border-radius: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border-radius: 0;
   border: none;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
 }
 
 .btn-primary {
-  background: var(--petrol-deep);
-  color: var(--white);
+  background: var(--gold);
+  color: var(--navy);
+  border: 0.75px solid var(--gold);
 }
 
 .btn-primary:hover {
-  background: var(--petrol-dark);
+  background: transparent;
+  color: var(--gold);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--petrol-deep);
-  border: 1px solid var(--petrol-light);
+  color: var(--gold);
+  border: 0.75px solid var(--gold);
 }
 
 .btn-ghost:hover {
-  background: var(--off-white);
+  background: var(--gold);
+  color: var(--navy);
 }
 
 /* ── MODAL ── */
@@ -868,8 +951,8 @@ section {
   display: none;
   width: 24px;
   height: 24px;
-  border: 2.5px solid var(--petrol-light);
-  border-top-color: var(--petrol-deep);
+  border: 2px solid rgba(184,149,74,0.2);
+  border-top-color: var(--gold);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   margin: 1rem auto;
@@ -881,17 +964,19 @@ section {
 
 /* ── FOOTER ── */
 footer {
-  padding: 3rem;
+  padding: 3rem clamp(24px, 5vw, 80px);
   text-align: center;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
-  color: var(--ink-light);
-  border-top: 0.5px solid #ddeaed;
+  font-weight: 300;
+  color: var(--steel);
+  border-top: 0.5px solid rgba(0,0,0,0.06);
 }
 
 /* ── DIVIDER ── */
 .divider {
   height: 0.5px;
-  background: #ddeaed;
+  background: rgba(0,0,0,0.06);
   margin: 0;
 }
 
@@ -900,7 +985,7 @@ footer {
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: #0B1214;
+  background: var(--navy);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -915,12 +1000,7 @@ footer {
 }
 
 .landing-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(200,223,230,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,223,230,0.025) 1px, transparent 1px);
-  background-size: 56px 56px;
+  display: none;
 }
 
 .landing-content {
@@ -949,54 +1029,53 @@ footer {
 }
 
 .landing-wordmark h1 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 32px;
-  font-weight: 500;
-  color: #EEF6F8;
-  letter-spacing: -0.3px;
+  font-weight: 200;
+  color: var(--cream);
+  letter-spacing: 0.06em;
   line-height: 1;
 }
 
 .landing-wordmark p {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: 0.12em;
-  color: rgba(200,223,230,0.4);
-  margin-top: 4px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--steel);
+  margin-top: 6px;
   text-transform: uppercase;
 }
 
 .landing-disclaimer {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   font-weight: 300;
   font-style: italic;
-  color: rgba(200,223,230,0.3);
-  line-height: 1.8;
+  color: rgba(122,143,166,0.6);
+  line-height: 1.85;
   margin-bottom: 2.5rem;
 }
 
 .landing-enter {
   display: inline-block;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #0B1214;
-  background: #C8A85C;
-  border: none;
+  color: var(--gold);
+  background: transparent;
+  border: 0.75px solid var(--gold);
   padding: 14px 48px;
-  border-radius: 8px;
+  border-radius: 0;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: all 0.35s ease;
 }
 
 .landing-enter:hover {
-  background: #E8C872;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(200,168,92,0.25);
+  background: var(--gold);
+  color: var(--navy);
 }
 </style>
 </head>
@@ -1004,16 +1083,16 @@ footer {
 
 <!-- LANDING PAGE -->
 <div class="landing" id="landingPage">
-  <div class="landing-grid"></div>
   <div class="landing-content">
     <div class="landing-logo">
-      <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="44" height="44" rx="11" fill="#C8A85C"/>
-        <path d="M11 22 L22 11 L33 22 L22 33 Z" fill="#0B1214" opacity="0.4"/>
-        <path d="M16 22 L22 16 L28 22 L22 28 Z" fill="#0B1214"/>
+      <svg viewBox="0 0 68 68" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="66" height="66" stroke="#B8954A" stroke-width="0.75"/>
+        <rect x="14" y="14" width="40" height="40" stroke="rgba(184,149,74,0.45)" stroke-width="0.5"/>
+        <polyline points="22,48 30,40 38,44 46,28" stroke="#B8954A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="46" cy="28" r="2.5" fill="#B8954A"/>
       </svg>
       <div class="landing-wordmark">
-        <h1>JC Advisory</h1>
+        <h1>JC Asset<br><span style="font-weight:200">Management</span></h1>
         <p>Wealth Management</p>
       </div>
     </div>
@@ -1038,12 +1117,13 @@ footer {
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="32" height="32" rx="8" fill="#C8A85C"/>
-      <path d="M8 16 L16 8 L24 16 L16 24 Z" fill="#0F1A1D" opacity="0.4"/>
-      <path d="M12 16 L16 12 L20 16 L16 20 Z" fill="#0F1A1D"/>
+    <svg viewBox="0 0 48 48" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="42" height="42" rx="3" fill="#0A1628" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+      <polyline points="12,34 18,28 24,31 30,22 36,16" stroke="#B8954A" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="36" cy="16" r="2" fill="#B8954A"/>
+      <line x1="12" y1="36" x2="36" y2="36" stroke="rgba(184,149,74,0.3)" stroke-width="0.5"/>
     </svg>
-    <span class="nav-brand">JC Advisory <span>| Wealth Management</span></span>
+    <span class="nav-brand">JC Asset Management <span>| Wealth</span></span>
   </div>
   <div style="display:flex;align-items:center;">
     <ul class="nav-links">
@@ -1070,10 +1150,10 @@ footer {
 
 <!-- HERO -->
 <div class="hero" id="top">
-  <div class="hero-grid"></div>
   <div class="hero-content">
     <div class="hero-eyebrow" data-i18n="hero.eyebrow">Portfolio Report</div>
     <h1 id="heroTitle" data-i18n="hero.title">Wealth Management Portfolio</h1>
+    <div class="hero-divider"></div>
     <p class="hero-sub" id="heroDate" data-i18n="hero.date">Report generated 10 April 2026</p>
     <div class="hero-stats">
       <div class="hero-stat">
@@ -1332,24 +1412,30 @@ footer {
 <script>
 // ── Brand Palette ──
 const P = {
-  petrolDeep: '#2B6475',
-  petrolDark: '#1C2B2F',
-  petrolMid: '#8BBFC9',
-  petrolLight: '#C8DFE6',
-  blush: '#F4C5C5',
-  blushDeep: '#9B3535',
-  straw: '#F5E6C0',
-  strawDeep: '#7C5B15',
-  sage: '#C9E8D5',
-  sageDeep: '#286B46',
-  ink: '#1C2B2F',
-  inkLight: '#6B8C96',
+  navy: '#0D1B2A',
+  slate: '#1E2D3D',
+  gold: '#B8954A',
+  goldPale: '#E5D4A8',
+  steel: '#7A8FA6',
+  offwhite: '#F9F7F4',
+  cream: '#F0EDE6',
+  // Aliases for chart code
+  petrolDeep: '#1E2D3D',
+  petrolDark: '#0D1B2A',
+  petrolMid: '#7A8FA6',
+  sageDeep: '#2D6A4F',
+  sage: '#95D5B2',
+  straw: '#E5D4A8',
+  strawDeep: '#B8954A',
+  blush: '#E5A0A0',
+  blushDeep: '#9B2226',
+  inkLight: '#7A8FA6',
 };
 
 const CHART_COLORS = [
-  P.petrolDeep, P.petrolMid, P.sage, P.straw, P.blush,
-  P.sageDeep, P.strawDeep, P.blushDeep, P.petrolLight, P.petrolDark,
-  '#A8D4DC', '#D4A8A8', '#D4CCA8', '#A8D4B8', '#BCA8D4',
+  P.slate, P.gold, P.steel, P.goldPale, '#2D6A4F',
+  '#95D5B2', P.navy, '#9B2226', '#E5A0A0', '#5A7D8F',
+  '#A8B8C8', '#D4CCA8', '#8FA89A', '#C4A882', '#7A6B8F',
 ];
 
 // ── i18n ──
@@ -1765,7 +1851,7 @@ function makeBarChart(canvasId, labels, data, color) {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: P.petrolDark,
+          backgroundColor: P.navy,
           titleFont: { family: "'Inter', sans-serif", size: 11 },
           bodyFont: { family: "'Inter', sans-serif", size: 11 },
           callbacks: { label: ctx => ctx.parsed.x.toFixed(1) + '%' }
@@ -1815,7 +1901,7 @@ function makeDoughnut(canvasId, labels, data, colors) {
           }
         },
         tooltip: {
-          backgroundColor: P.petrolDark,
+          backgroundColor: P.navy,
           callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed.toFixed(1) + '%' }
         }
       }
@@ -1842,7 +1928,7 @@ function makeVerticalBar(canvasId, labels, data, colors, annotation) {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: P.petrolDark,
+          backgroundColor: P.navy,
           callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '%' }
         }
       },
@@ -2004,8 +2090,8 @@ function renderPerformance() {
 
   // Gradient fill
   const gradient = ctx.createLinearGradient(0, 0, 0, 280);
-  gradient.addColorStop(0, 'rgba(43,100,117,0.15)');
-  gradient.addColorStop(1, 'rgba(43,100,117,0.01)');
+  gradient.addColorStop(0, 'rgba(184,149,74,0.12)');
+  gradient.addColorStop(1, 'rgba(184,149,74,0.01)');
 
   charts['chartPerformance'] = new Chart(ctx, {
     type: 'line',
@@ -2015,7 +2101,7 @@ function renderPerformance() {
         {
           label: t('cl.portfolio'),
           data: perf.prices,
-          borderColor: P.petrolDeep,
+          borderColor: P.gold,
           borderWidth: 1.5,
           backgroundColor: gradient,
           fill: true,
@@ -2026,7 +2112,7 @@ function renderPerformance() {
         {
           label: t('cl.msci'),
           data: msciWorld.prices,
-          borderColor: '#C8A85C',
+          borderColor: P.steel,
           borderWidth: 1.5,
           borderDash: [6, 3],
           backgroundColor: 'transparent',
@@ -2054,7 +2140,7 @@ function renderPerformance() {
           }
         },
         tooltip: {
-          backgroundColor: P.petrolDark,
+          backgroundColor: P.navy,
           titleFont: { family: "'Inter', sans-serif", size: 11 },
           bodyFont: { family: "'Inter', sans-serif", size: 11 },
           callbacks: {
@@ -2247,8 +2333,8 @@ function renderDetailCharts(ticker, weight) {
   const ctx = document.getElementById('detailPerfChart');
   if (ctx) {
     const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 200);
-    gradient.addColorStop(0, 'rgba(43,100,117,0.12)');
-    gradient.addColorStop(1, 'rgba(43,100,117,0.01)');
+    gradient.addColorStop(0, 'rgba(184,149,74,0.10)');
+    gradient.addColorStop(1, 'rgba(184,149,74,0.01)');
 
     detailCharts['perf'] = new Chart(ctx, {
       type: 'line',
@@ -2256,7 +2342,7 @@ function renderDetailCharts(ticker, weight) {
         labels: perfData.dates,
         datasets: [{
           data: perfData.prices,
-          borderColor: P.petrolDeep,
+          borderColor: P.gold,
           borderWidth: 1.5,
           backgroundColor: gradient,
           fill: true,
