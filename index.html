@@ -894,9 +894,146 @@ footer {
   background: #ddeaed;
   margin: 0;
 }
+
+/* ── LANDING PAGE ── */
+.landing {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: #0B1214;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.landing.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.landing-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,223,230,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,223,230,0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.landing-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 560px;
+  padding: 2rem;
+}
+
+.landing-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 2.5rem;
+}
+
+.landing-logo svg {
+  width: 44px;
+  height: 44px;
+}
+
+.landing-wordmark {
+  text-align: left;
+}
+
+.landing-wordmark h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: #EEF6F8;
+  letter-spacing: -0.3px;
+  line-height: 1;
+}
+
+.landing-wordmark p {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba(200,223,230,0.4);
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.landing-disclaimer {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(200,223,230,0.3);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.landing-enter {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0B1214;
+  background: #C8A85C;
+  border: none;
+  padding: 14px 48px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.landing-enter:hover {
+  background: #E8C872;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(200,168,92,0.25);
+}
 </style>
 </head>
 <body>
+
+<!-- LANDING PAGE -->
+<div class="landing" id="landingPage">
+  <div class="landing-grid"></div>
+  <div class="landing-content">
+    <div class="landing-logo">
+      <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="44" height="44" rx="11" fill="#C8A85C"/>
+        <path d="M11 22 L22 11 L33 22 L22 33 Z" fill="#0B1214" opacity="0.4"/>
+        <path d="M16 22 L22 16 L28 22 L22 28 Z" fill="#0B1214"/>
+      </svg>
+      <div class="landing-wordmark">
+        <h1>JC Advisory</h1>
+        <p>Wealth Management</p>
+      </div>
+    </div>
+    <div class="landing-disclaimer" data-i18n="land.disclaimer">
+      The information provided is for general informational and educational purposes only and should not be construed as financial, investment, legal, or tax advice. Nothing contained herein constitutes a recommendation, solicitation, or offer to buy or sell any security, financial instrument, or investment product. Any views expressed are subject to change without notice and may not reflect current market conditions. You should consult your own financial, legal, tax, or other professional advisor before making any investment decision. Past performance is not indicative of future results, and all investments involve risk, including the possible loss of principal.
+    </div>
+    <button class="landing-enter" onclick="enterApp()" data-i18n="land.enter">Enter</button>
+    <div class="lang-switcher" style="margin:2rem auto 0;border:none;padding:0;justify-content:center;">
+      <button class="lang-btn active" onclick="setLang('en')" title="English">
+        <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect width="22" height="16" fill="#012169"/><path d="M0 0L22 16M22 0L0 16" stroke="#fff" stroke-width="2.5"/><path d="M0 0L22 16M22 0L0 16" stroke="#C8102E" stroke-width="1.2"/><path d="M11 0V16M0 8H22" stroke="#fff" stroke-width="4.5"/><path d="M11 0V16M0 8H22" stroke="#C8102E" stroke-width="2.5"/></svg>
+      </button>
+      <button class="lang-btn" onclick="setLang('fr')" title="Français">
+        <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect width="7.33" height="16" fill="#002395"/><rect x="7.33" width="7.34" height="16" fill="#fff"/><rect x="14.67" width="7.33" height="16" fill="#ED2939"/></svg>
+      </button>
+      <button class="lang-btn" onclick="setLang('pt')" title="Português">
+        <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect width="22" height="16" fill="#009739"/><polygon points="11,1.5 21,8 11,14.5 1,8" fill="#FEDD00"/><circle cx="11" cy="8" r="3.2" fill="#002776"/><rect x="7.5" y="7.2" width="7" height="1.6" rx="0.8" fill="#fff"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1268,6 +1405,9 @@ const I18N = {
     'tbl.ticker': 'Ticker', 'tbl.name': 'Name', 'tbl.class': 'Class', 'tbl.weight': 'Weight',
     // Footer
     'footer': 'JC Advisory \u2014 Wealth Management Portfolio Report \u00b7 Confidential \u00b7 Generated 10 April 2026',
+    // Landing
+    'land.disclaimer': 'The information provided is for general informational and educational purposes only and should not be construed as financial, investment, legal, or tax advice. Nothing contained herein constitutes a recommendation, solicitation, or offer to buy or sell any security, financial instrument, or investment product. Any views expressed are subject to change without notice and may not reflect current market conditions. You should consult your own financial, legal, tax, or other professional advisor before making any investment decision. Past performance is not indicative of future results, and all investments involve risk, including the possible loss of principal.',
+    'land.enter': 'Enter',
     // Detail modal
     'det.simPerf': 'Simulated Performance', 'det.breakdown': 'Breakdown',
     'det.weight': 'Weight', 'det.assetClass': 'Asset Class', 'det.expReturn': 'Exp. Ann. Return',
@@ -1317,6 +1457,8 @@ const I18N = {
     'up.generate': 'G\u00e9n\u00e9rer le Rapport',
     'tbl.ticker': 'Ticker', 'tbl.name': 'Nom', 'tbl.class': 'Classe', 'tbl.weight': 'Poids',
     'footer': 'JC Advisory \u2014 Rapport de Portefeuille \u00b7 Confidentiel \u00b7 G\u00e9n\u00e9r\u00e9 le 10 avril 2026',
+    'land.disclaimer': 'Les informations fournies le sont \u00e0 titre informatif et \u00e9ducatif uniquement et ne doivent pas \u00eatre interpr\u00e9t\u00e9es comme des conseils financiers, d\u2019investissement, juridiques ou fiscaux. Rien dans ce document ne constitue une recommandation, une sollicitation ou une offre d\u2019achat ou de vente de titres, d\u2019instruments financiers ou de produits d\u2019investissement. Les opinions exprim\u00e9es peuvent \u00eatre modifi\u00e9es sans pr\u00e9avis et peuvent ne pas refl\u00e9ter les conditions actuelles du march\u00e9. Vous devez consulter votre propre conseiller financier, juridique, fiscal ou autre professionnel avant de prendre toute d\u00e9cision d\u2019investissement. Les performances pass\u00e9es ne pr\u00e9jugent pas des r\u00e9sultats futurs, et tout investissement comporte des risques, y compris la perte \u00e9ventuelle du capital.',
+    'land.enter': 'Entrer',
     'det.simPerf': 'Performance Simul\u00e9e', 'det.breakdown': 'R\u00e9partition',
     'det.weight': 'Poids', 'det.assetClass': 'Classe d\u2019actif', 'det.expReturn': 'Rend. ann. attendu',
     'det.annVol': 'Volatilit\u00e9 ann.', 'det.effDur': 'Duration eff.', 'det.avgMat': 'Maturit\u00e9 moy.',
@@ -1363,6 +1505,8 @@ const I18N = {
     'up.generate': 'Gerar Relat\u00f3rio',
     'tbl.ticker': 'Ticker', 'tbl.name': 'Nome', 'tbl.class': 'Classe', 'tbl.weight': 'Peso',
     'footer': 'JC Advisory \u2014 Relat\u00f3rio de Portf\u00f3lio \u00b7 Confidencial \u00b7 Gerado em 10 de abril de 2026',
+    'land.disclaimer': 'As informa\u00e7\u00f5es fornecidas t\u00eam car\u00e1ter meramente informativo e educacional e n\u00e3o devem ser interpretadas como aconselhamento financeiro, de investimento, jur\u00eddico ou fiscal. Nada aqui contido constitui uma recomenda\u00e7\u00e3o, solicita\u00e7\u00e3o ou oferta de compra ou venda de qualquer t\u00edtulo, instrumento financeiro ou produto de investimento. Quaisquer opini\u00f5es expressas est\u00e3o sujeitas a altera\u00e7\u00f5es sem aviso pr\u00e9vio e podem n\u00e3o refletir as condi\u00e7\u00f5es atuais do mercado. Voc\u00ea deve consultar seu pr\u00f3prio consultor financeiro, jur\u00eddico, fiscal ou outro profissional antes de tomar qualquer decis\u00e3o de investimento. Desempenho passado n\u00e3o \u00e9 indicativo de resultados futuros, e todos os investimentos envolvem risco, incluindo a possibilidade de perda do capital.',
+    'land.enter': 'Entrar',
     'det.simPerf': 'Performance Simulada', 'det.breakdown': 'Composi\u00e7\u00e3o',
     'det.weight': 'Peso', 'det.assetClass': 'Classe de ativo', 'det.expReturn': 'Ret. anual esperado',
     'det.annVol': 'Volatilidade an.', 'det.effDur': 'Dura\u00e7\u00e3o ef.', 'det.avgMat': 'Maturidade m\u00e9d.',
@@ -2471,6 +2615,11 @@ function handleManualEntry() {
     }
     spinner.classList.remove('active');
   }, 400);
+}
+
+// ── Landing Page ──
+function enterApp() {
+  document.getElementById('landingPage').classList.add('hidden');
 }
 
 // ── Init ──
