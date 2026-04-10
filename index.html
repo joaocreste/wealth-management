@@ -95,9 +95,35 @@ nav {
 
 .nav-links a:hover { color: #E8C872; }
 
+/* ── LANG SWITCHER ── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 1.5rem;
+  padding-left: 1.5rem;
+  border-left: 1px solid rgba(200,180,120,0.15);
+}
+
+.lang-btn {
+  width: 22px;
+  height: 16px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s;
+  padding: 0;
+  background: none;
+  overflow: hidden;
+}
+
+.lang-btn:hover { opacity: 0.75; }
+.lang-btn.active { opacity: 1; }
+
 /* ── HERO ── */
 .hero {
-  padding: 96px 3rem 3rem;
+  padding: 80px 3rem 2rem;
   background: var(--petrol-dark);
   color: #EEF6F8;
   position: relative;
@@ -177,7 +203,7 @@ nav {
 }
 
 section {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
 }
 
 .section-label {
@@ -214,7 +240,7 @@ section {
   color: var(--ink-light);
   max-width: 520px;
   line-height: 1.7;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 /* ── CARDS ── */
@@ -222,8 +248,8 @@ section {
   background: var(--white);
   border-radius: 12px;
   border: 0.5px solid #ddeaed;
-  padding: 2rem;
-  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .card-title {
@@ -246,13 +272,13 @@ section {
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .grid-3 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -349,8 +375,8 @@ section {
 /* ── METRIC PILLS ── */
 .metrics-row {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -882,42 +908,55 @@ footer {
     </svg>
     <span class="nav-brand">JC Advisory <span>| Wealth Management</span></span>
   </div>
-  <ul class="nav-links">
-    <li><a onclick="scrollToSection('#holdings')">Holdings</a></li>
-    <li><a onclick="scrollToSection('#performance')">Performance</a></li>
-    <li><a onclick="scrollToSection('#overview')">Overview</a></li>
-    <li><a onclick="scrollToSection('#equity')">Equity</a></li>
-    <li><a onclick="scrollToSection('#fixed-income')">Fixed Income</a></li>
-    <li><a onclick="scrollToSection('#upload')">Upload</a></li>
-  </ul>
+  <div style="display:flex;align-items:center;">
+    <ul class="nav-links">
+      <li><a onclick="scrollToSection('#holdings')" data-i18n="nav.holdings">Holdings</a></li>
+      <li><a onclick="scrollToSection('#performance')" data-i18n="nav.performance">Performance</a></li>
+      <li><a onclick="scrollToSection('#overview')" data-i18n="nav.overview">Overview</a></li>
+      <li><a onclick="scrollToSection('#equity')" data-i18n="nav.equity">Equity</a></li>
+      <li><a onclick="scrollToSection('#fixed-income')" data-i18n="nav.fi">Fixed Income</a></li>
+      <li><a onclick="scrollToSection('#upload')" data-i18n="nav.upload">Upload</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')" title="English">
+        <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect width="22" height="16" fill="#012169"/><path d="M0 0L22 16M22 0L0 16" stroke="#fff" stroke-width="2.5"/><path d="M0 0L22 16M22 0L0 16" stroke="#C8102E" stroke-width="1.2"/><path d="M11 0V16M0 8H22" stroke="#fff" stroke-width="4.5"/><path d="M11 0V16M0 8H22" stroke="#C8102E" stroke-width="2.5"/></svg>
+      </button>
+      <button class="lang-btn" onclick="setLang('fr')" title="Français">
+        <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect width="7.33" height="16" fill="#002395"/><rect x="7.33" width="7.34" height="16" fill="#fff"/><rect x="14.67" width="7.33" height="16" fill="#ED2939"/></svg>
+      </button>
+      <button class="lang-btn" onclick="setLang('pt')" title="Português">
+        <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect width="22" height="16" fill="#009739"/><polygon points="11,1.5 21,8 11,14.5 1,8" fill="#FEDD00"/><circle cx="11" cy="8" r="3.2" fill="#002776"/><rect x="7.5" y="7.2" width="7" height="1.6" rx="0.8" fill="#fff"/></svg>
+      </button>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero" id="top">
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Portfolio Report</div>
-    <h1 id="heroTitle">Wealth Management Portfolio</h1>
-    <p class="hero-sub" id="heroDate">Report generated 10 April 2026</p>
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Portfolio Report</div>
+    <h1 id="heroTitle" data-i18n="hero.title">Wealth Management Portfolio</h1>
+    <p class="hero-sub" id="heroDate" data-i18n="hero.date">Report generated 10 April 2026</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-label">Holdings</span>
+        <span class="hero-stat-label" data-i18n="hero.holdings">Holdings</span>
         <span class="hero-stat-value" id="statHoldings">5</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-label">Equity</span>
+        <span class="hero-stat-label" data-i18n="hero.equity">Equity</span>
         <span class="hero-stat-value" id="statEquity">50%</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-label">Fixed Income</span>
+        <span class="hero-stat-label" data-i18n="hero.fi">Fixed Income</span>
         <span class="hero-stat-value" id="statFI">51%</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-label">Wtd. Duration</span>
+        <span class="hero-stat-label" data-i18n="hero.duration">Wtd. Duration</span>
         <span class="hero-stat-value" id="statDuration">3.3 yr</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-label">Wtd. Credit</span>
+        <span class="hero-stat-label" data-i18n="hero.credit">Wtd. Credit</span>
         <span class="hero-stat-value" id="statCredit">A+</span>
       </div>
     </div>
@@ -927,9 +966,9 @@ footer {
 <!-- ═══════════ HOLDINGS ═══════════ -->
 <section id="holdings">
   <div class="container">
-    <div class="section-label">Portfolio</div>
-    <div class="section-title">Holdings</div>
-    <div class="section-desc">Click on any holding to view its full characteristics and breakdown.</div>
+    <div class="section-label" data-i18n="hold.label">Portfolio</div>
+    <div class="section-title" data-i18n="hold.title">Holdings</div>
+    <div class="section-desc" data-i18n="hold.desc">Click on any holding to view its full characteristics and breakdown.</div>
     <div class="holdings-grid" id="holdingsGrid"></div>
   </div>
 </section>
@@ -944,37 +983,37 @@ footer {
 <!-- ═══════════ PERFORMANCE ═══════════ -->
 <section id="performance">
   <div class="container">
-    <div class="section-label">Performance</div>
-    <div class="section-title">Portfolio Performance</div>
-    <div class="section-desc">Simulated growth of the portfolio with fixed weights, rebased to 100 on 1 January 2023.</div>
+    <div class="section-label" data-i18n="perf.label">Performance</div>
+    <div class="section-title" data-i18n="perf.title">Portfolio Performance</div>
+    <div class="section-desc" data-i18n="perf.desc">Simulated growth of the portfolio with fixed weights, rebased to 100 on 1 January 2023.</div>
 
     <div class="perf-layout">
       <div class="perf-chart-card">
-        <div class="card-title">Growth of 100</div>
+        <div class="card-title" data-i18n="perf.growth">Growth of 100</div>
         <div class="perf-chart-wrap">
           <canvas id="chartPerformance"></canvas>
         </div>
       </div>
       <div class="perf-metrics">
         <div class="perf-metric-card">
-          <div class="perf-metric-label">Since Jan 2023</div>
+          <div class="perf-metric-label" data-i18n="perf.since">Since Jan 2023</div>
           <div class="perf-metric-value" id="perfSince2023">—</div>
-          <div class="perf-metric-sub">Cumulative return</div>
+          <div class="perf-metric-sub" data-i18n="perf.cumRet">Cumulative return</div>
         </div>
         <div class="perf-metric-card">
-          <div class="perf-metric-label">Year-to-Date</div>
+          <div class="perf-metric-label" data-i18n="perf.ytdLabel">Year-to-Date</div>
           <div class="perf-metric-value" id="perfYTD">—</div>
-          <div class="perf-metric-sub">2026 performance</div>
+          <div class="perf-metric-sub" data-i18n="perf.ytdSub">2026 performance</div>
         </div>
         <div class="perf-metric-card">
-          <div class="perf-metric-label">Median Daily Return</div>
+          <div class="perf-metric-label" data-i18n="perf.medianLabel">Median Daily Return</div>
           <div class="perf-metric-value" id="perfMedian">—</div>
-          <div class="perf-metric-sub">50th percentile</div>
+          <div class="perf-metric-sub" data-i18n="perf.medianSub">50th percentile</div>
         </div>
         <div class="perf-metric-card">
-          <div class="perf-metric-label">Annualised Volatility</div>
+          <div class="perf-metric-label" data-i18n="perf.volLabel">Annualised Volatility</div>
           <div class="perf-metric-value" id="perfVol">—</div>
-          <div class="perf-metric-sub">Standard deviation &times; &radic;252</div>
+          <div class="perf-metric-sub" data-i18n="perf.volSub">Standard deviation &times; &radic;252</div>
         </div>
       </div>
     </div>
@@ -986,33 +1025,33 @@ footer {
 <!-- ═══════════ SECTION 1: OVERVIEW ═══════════ -->
 <section id="overview">
   <div class="container">
-    <div class="section-label">Section 01</div>
-    <div class="section-title">Portfolio Overview</div>
-    <div class="section-desc">Asset allocation and composition across equity and fixed income holdings.</div>
+    <div class="section-label" data-i18n="ov.label">Section 01</div>
+    <div class="section-title" data-i18n="ov.title">Portfolio Overview</div>
+    <div class="section-desc" data-i18n="ov.desc">Asset allocation and composition across equity and fixed income holdings.</div>
 
     <div class="grid-2">
       <!-- Asset Allocation Donut -->
       <div class="card">
-        <div class="card-title">Asset Allocation</div>
+        <div class="card-title" data-i18n="ov.alloc">Asset Allocation</div>
         <div class="donut-wrap">
           <canvas id="chartAllocation"></canvas>
           <div class="donut-center">
             <div class="donut-center-value" id="allocCenterVal">50 / 51</div>
-            <div class="donut-center-label">Equity / FI</div>
+            <div class="donut-center-label" data-i18n="ov.eqFi">Equity / FI</div>
           </div>
         </div>
       </div>
 
       <!-- Holdings Table -->
       <div class="card">
-        <div class="card-title">Portfolio Composition</div>
+        <div class="card-title" data-i18n="ov.comp">Portfolio Composition</div>
         <table class="data-table" id="holdingsTable">
           <thead>
             <tr>
-              <th>Ticker</th>
-              <th>Name</th>
-              <th>Class</th>
-              <th class="num">Weight</th>
+              <th data-i18n="tbl.ticker">Ticker</th>
+              <th data-i18n="tbl.name">Name</th>
+              <th data-i18n="tbl.class">Class</th>
+              <th class="num" data-i18n="tbl.weight">Weight</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -1027,17 +1066,17 @@ footer {
 <!-- ═══════════ SECTION 2: EQUITY ═══════════ -->
 <section id="equity">
   <div class="container">
-    <div class="section-label">Section 02</div>
-    <div class="section-title">Equity Breakdown</div>
-    <div class="section-desc">Sector and geographic exposure across equity holdings weighted by portfolio allocation.</div>
+    <div class="section-label" data-i18n="eq.label">Section 02</div>
+    <div class="section-title" data-i18n="eq.title">Equity Breakdown</div>
+    <div class="section-desc" data-i18n="eq.desc">Sector and geographic exposure across equity holdings weighted by portfolio allocation.</div>
 
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">Sector Exposure</div>
+        <div class="card-title" data-i18n="c.sector">Sector Exposure</div>
         <div class="chart-wrap"><canvas id="chartEqSector"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Geographic Exposure</div>
+        <div class="card-title" data-i18n="c.geo">Geographic Exposure</div>
         <div class="chart-wrap"><canvas id="chartEqGeo"></canvas></div>
       </div>
     </div>
@@ -1049,56 +1088,56 @@ footer {
 <!-- ═══════════ SECTION 3: FIXED INCOME ═══════════ -->
 <section id="fixed-income">
   <div class="container">
-    <div class="section-label">Section 03</div>
-    <div class="section-title">Fixed Income Breakdown</div>
-    <div class="section-desc">Credit quality, duration, maturity, and exposure analysis across bond holdings.</div>
+    <div class="section-label" data-i18n="fi.label">Section 03</div>
+    <div class="section-title" data-i18n="fi.title">Fixed Income Breakdown</div>
+    <div class="section-desc" data-i18n="fi.desc">Credit quality, duration, maturity, and exposure analysis across bond holdings.</div>
 
     <!-- Key Metrics -->
     <div class="metrics-row" id="fiMetrics">
       <div class="metric-pill">
-        <div class="metric-pill-label">Wtd. Eff. Duration</div>
+        <div class="metric-pill-label" data-i18n="fi.durLabel">Wtd. Eff. Duration</div>
         <div class="metric-pill-value" id="metricDuration">3.29 yr</div>
-        <div class="metric-pill-note">Interest rate sensitivity</div>
+        <div class="metric-pill-note" data-i18n="fi.durNote">Interest rate sensitivity</div>
       </div>
       <div class="metric-pill">
-        <div class="metric-pill-label">Wtd. Avg. Maturity</div>
+        <div class="metric-pill-label" data-i18n="fi.matLabel">Wtd. Avg. Maturity</div>
         <div class="metric-pill-value" id="metricMaturity">3.83 yr</div>
-        <div class="metric-pill-note">Time to principal repayment</div>
+        <div class="metric-pill-note" data-i18n="fi.matNote">Time to principal repayment</div>
       </div>
       <div class="metric-pill">
-        <div class="metric-pill-label">Wtd. Median Rating</div>
+        <div class="metric-pill-label" data-i18n="fi.ratLabel">Wtd. Median Rating</div>
         <div class="metric-pill-value" id="metricRating">A+</div>
-        <div class="metric-pill-note">Investment grade</div>
+        <div class="metric-pill-note" data-i18n="fi.ratNote">Investment grade</div>
       </div>
       <div class="metric-pill">
-        <div class="metric-pill-label">Wtd. Yield (est.)</div>
+        <div class="metric-pill-label" data-i18n="fi.yldLabel">Wtd. Yield (est.)</div>
         <div class="metric-pill-value" id="metricYield">3.6%</div>
-        <div class="metric-pill-note">Blended YTM</div>
+        <div class="metric-pill-note" data-i18n="fi.yldNote">Blended YTM</div>
       </div>
     </div>
 
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">Sector Exposure</div>
+        <div class="card-title" data-i18n="c.sector">Sector Exposure</div>
         <div class="chart-wrap"><canvas id="chartFiSector"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Geographic Exposure</div>
+        <div class="card-title" data-i18n="c.geo">Geographic Exposure</div>
         <div class="chart-wrap"><canvas id="chartFiGeo"></canvas></div>
       </div>
     </div>
 
     <div class="grid-3" style="margin-top:0">
       <div class="card">
-        <div class="card-title">Credit Quality</div>
+        <div class="card-title" data-i18n="c.credit">Credit Quality</div>
         <div class="chart-wrap"><canvas id="chartCredit"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Duration Distribution</div>
+        <div class="card-title" data-i18n="c.duration">Duration Distribution</div>
         <div class="chart-wrap"><canvas id="chartDuration"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Maturity Profile</div>
+        <div class="card-title" data-i18n="c.maturity">Maturity Profile</div>
         <div class="chart-wrap"><canvas id="chartMaturity"></canvas></div>
       </div>
     </div>
@@ -1110,9 +1149,9 @@ footer {
 <!-- ═══════════ SECTION 4: UPLOAD ═══════════ -->
 <section id="upload">
   <div class="container">
-    <div class="section-label">Section 04</div>
-    <div class="section-title">Upload New Portfolio</div>
-    <div class="section-desc">Upload a portfolio image or enter holdings manually to generate a new report.</div>
+    <div class="section-label" data-i18n="up.label">Section 04</div>
+    <div class="section-title" data-i18n="up.title">Upload New Portfolio</div>
+    <div class="section-desc" data-i18n="up.desc">Upload a portfolio image or enter holdings manually to generate a new report.</div>
 
     <div class="grid-2">
       <!-- Image Upload -->
@@ -1122,22 +1161,22 @@ footer {
           <circle cx="18" cy="22" r="4"/>
           <path d="M6 34 l12-10 8 6 10-12 6 8"/>
         </svg>
-        <div class="upload-title">Drop portfolio image here</div>
-        <div class="upload-desc">Supports PNG, JPG, or screenshot of a portfolio table</div>
-        <div class="upload-or">or</div>
-        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+        <div class="upload-title" data-i18n="up.drop">Drop portfolio image here</div>
+        <div class="upload-desc" data-i18n="up.formats">Supports PNG, JPG, or screenshot of a portfolio table</div>
+        <div class="upload-or" data-i18n="up.or">or</div>
+        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()" data-i18n="up.browse">Browse Files</button>
         <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileUpload(this.files[0])">
       </div>
 
       <!-- Manual Entry -->
       <div class="card" style="display:flex;flex-direction:column;justify-content:center;">
-        <div class="card-title">Enter Manually</div>
-        <p style="font-size:12px;color:var(--ink-light);margin-bottom:1rem;">
+        <div class="card-title" data-i18n="up.manual">Enter Manually</div>
+        <p style="font-size:12px;color:var(--ink-light);margin-bottom:1rem;" data-i18n-html="up.manualDesc">
           Enter one holding per line: <code style="background:var(--off-white);padding:2px 6px;border-radius:4px;font-size:11px;">TICKER, Weight%</code>
         </p>
         <textarea id="manualInput" placeholder="VUAA, 27&#10;IUSQ, 23&#10;IBCS, 27&#10;SXRH, 7&#10;SYBW, 17" style="width:100%;min-height:160px;border:1px solid #ddeaed;border-radius:8px;padding:1rem;font-family:'Inter',sans-serif;font-size:13px;resize:vertical;outline:none;"></textarea>
         <div style="margin-top:1rem;display:flex;gap:0.75rem;">
-          <button class="btn btn-primary" onclick="handleManualEntry()">Generate Report</button>
+          <button class="btn btn-primary" onclick="handleManualEntry()" data-i18n="up.generate">Generate Report</button>
         </div>
         <div class="spinner" id="manualSpinner"></div>
         <div id="uploadStatus" style="font-size:12px;color:var(--ink-light);margin-top:0.5rem;"></div>
@@ -1175,6 +1214,191 @@ const CHART_COLORS = [
   P.sageDeep, P.strawDeep, P.blushDeep, P.petrolLight, P.petrolDark,
   '#A8D4DC', '#D4A8A8', '#D4CCA8', '#A8D4B8', '#BCA8D4',
 ];
+
+// ── i18n ──
+let currentLang = 'en';
+
+const I18N = {
+  en: {
+    // Nav
+    'nav.holdings': 'Holdings', 'nav.performance': 'Performance', 'nav.overview': 'Overview',
+    'nav.equity': 'Equity', 'nav.fi': 'Fixed Income', 'nav.upload': 'Upload',
+    // Hero
+    'hero.eyebrow': 'Portfolio Report', 'hero.title': 'Wealth Management Portfolio',
+    'hero.date': 'Report generated 10 April 2026',
+    'hero.holdings': 'Holdings', 'hero.equity': 'Equity', 'hero.fi': 'Fixed Income',
+    'hero.duration': 'Wtd. Duration', 'hero.credit': 'Wtd. Credit',
+    // Holdings
+    'hold.label': 'Portfolio', 'hold.title': 'Holdings',
+    'hold.desc': 'Click on any holding to view its full characteristics and breakdown.',
+    // Performance
+    'perf.label': 'Performance', 'perf.title': 'Portfolio Performance',
+    'perf.desc': 'Simulated growth of the portfolio with fixed weights, rebased to 100 on 1 January 2023.',
+    'perf.growth': 'Growth of 100',
+    'perf.since': 'Since Jan 2023', 'perf.cumRet': 'Cumulative return',
+    'perf.ytdLabel': 'Year-to-Date', 'perf.ytdSub': '2026 performance',
+    'perf.medianLabel': 'Median Daily Return', 'perf.medianSub': '50th percentile',
+    'perf.volLabel': 'Annualised Volatility', 'perf.volSub': 'Standard deviation \u00d7 \u221a252',
+    // Overview
+    'ov.label': 'Section 01', 'ov.title': 'Portfolio Overview',
+    'ov.desc': 'Asset allocation and composition across equity and fixed income holdings.',
+    'ov.alloc': 'Asset Allocation', 'ov.comp': 'Portfolio Composition', 'ov.eqFi': 'Equity / FI',
+    // Equity
+    'eq.label': 'Section 02', 'eq.title': 'Equity Breakdown',
+    'eq.desc': 'Sector and geographic exposure across equity holdings weighted by portfolio allocation.',
+    // Fixed Income
+    'fi.label': 'Section 03', 'fi.title': 'Fixed Income Breakdown',
+    'fi.desc': 'Credit quality, duration, maturity, and exposure analysis across bond holdings.',
+    'fi.durLabel': 'Wtd. Eff. Duration', 'fi.durNote': 'Interest rate sensitivity',
+    'fi.matLabel': 'Wtd. Avg. Maturity', 'fi.matNote': 'Time to principal repayment',
+    'fi.ratLabel': 'Wtd. Median Rating', 'fi.ratNote': 'Investment grade',
+    'fi.yldLabel': 'Wtd. Yield (est.)', 'fi.yldNote': 'Blended YTM',
+    // Charts
+    'c.sector': 'Sector Exposure', 'c.geo': 'Geographic Exposure',
+    'c.credit': 'Credit Quality', 'c.duration': 'Duration Distribution', 'c.maturity': 'Maturity Profile',
+    // Upload
+    'up.label': 'Section 04', 'up.title': 'Upload New Portfolio',
+    'up.desc': 'Upload a portfolio image or enter holdings manually to generate a new report.',
+    'up.drop': 'Drop portfolio image here', 'up.formats': 'Supports PNG, JPG, or screenshot of a portfolio table',
+    'up.or': 'or', 'up.browse': 'Browse Files',
+    'up.manual': 'Enter Manually',
+    'up.manualDesc': 'Enter one holding per line: <code style="background:var(--off-white);padding:2px 6px;border-radius:4px;font-size:11px;">TICKER, Weight%</code>',
+    'up.generate': 'Generate Report',
+    // Table
+    'tbl.ticker': 'Ticker', 'tbl.name': 'Name', 'tbl.class': 'Class', 'tbl.weight': 'Weight',
+    // Footer
+    'footer': 'JC Advisory \u2014 Wealth Management Portfolio Report \u00b7 Confidential \u00b7 Generated 10 April 2026',
+    // Detail modal
+    'det.simPerf': 'Simulated Performance', 'det.breakdown': 'Breakdown',
+    'det.weight': 'Weight', 'det.assetClass': 'Asset Class', 'det.expReturn': 'Exp. Ann. Return',
+    'det.annVol': 'Ann. Volatility', 'det.effDur': 'Eff. Duration', 'det.avgMat': 'Avg. Maturity',
+    'det.yield': 'Yield (YTM)', 'det.index': 'Index', 'det.domicile': 'Domicile',
+    'det.replication': 'Replication', 'det.subtype': 'Sub-type', 'det.currency': 'Currency',
+    // Asset classes
+    'ac.equity': 'Equity', 'ac.fi': 'Fixed Income',
+    // Chart labels
+    'cl.portfolio': 'Portfolio', 'cl.msci': 'MSCI World',
+  },
+  fr: {
+    'nav.holdings': 'Positions', 'nav.performance': 'Performance', 'nav.overview': 'Aper\u00e7u',
+    'nav.equity': 'Actions', 'nav.fi': 'Obligations', 'nav.upload': 'Importer',
+    'hero.eyebrow': 'Rapport de Portefeuille', 'hero.title': 'Portefeuille de Gestion de Patrimoine',
+    'hero.date': 'Rapport g\u00e9n\u00e9r\u00e9 le 10 avril 2026',
+    'hero.holdings': 'Positions', 'hero.equity': 'Actions', 'hero.fi': 'Obligations',
+    'hero.duration': 'Dur. pond.', 'hero.credit': 'Cr\u00e9dit pond.',
+    'hold.label': 'Portefeuille', 'hold.title': 'Positions',
+    'hold.desc': 'Cliquez sur une position pour voir ses caract\u00e9ristiques et sa r\u00e9partition.',
+    'perf.label': 'Performance', 'perf.title': 'Performance du Portefeuille',
+    'perf.desc': 'Croissance simul\u00e9e du portefeuille \u00e0 poids fixes, rebas\u00e9e \u00e0 100 au 1er janvier 2023.',
+    'perf.growth': 'Croissance de 100',
+    'perf.since': 'Depuis jan. 2023', 'perf.cumRet': 'Rendement cumul\u00e9',
+    'perf.ytdLabel': 'Depuis d\u00e9but d\u2019ann\u00e9e', 'perf.ytdSub': 'Performance 2026',
+    'perf.medianLabel': 'Rendement quotidien m\u00e9dian', 'perf.medianSub': '50\u00e8me percentile',
+    'perf.volLabel': 'Volatilit\u00e9 annualis\u00e9e', 'perf.volSub': '\u00c9cart-type \u00d7 \u221a252',
+    'ov.label': 'Section 01', 'ov.title': 'Aper\u00e7u du Portefeuille',
+    'ov.desc': 'R\u00e9partition des actifs entre actions et obligations.',
+    'ov.alloc': 'R\u00e9partition des Actifs', 'ov.comp': 'Composition du Portefeuille', 'ov.eqFi': 'Actions / Oblig.',
+    'eq.label': 'Section 02', 'eq.title': 'D\u00e9tail Actions',
+    'eq.desc': 'Exposition sectorielle et g\u00e9ographique pond\u00e9r\u00e9e par l\u2019allocation.',
+    'fi.label': 'Section 03', 'fi.title': 'D\u00e9tail Obligations',
+    'fi.desc': 'Qualit\u00e9 de cr\u00e9dit, duration, maturit\u00e9 et exposition des positions obligataires.',
+    'fi.durLabel': 'Duration eff. pond.', 'fi.durNote': 'Sensibilit\u00e9 aux taux',
+    'fi.matLabel': 'Maturit\u00e9 moy. pond.', 'fi.matNote': 'D\u00e9lai de remboursement',
+    'fi.ratLabel': 'Notation m\u00e9diane pond.', 'fi.ratNote': 'Investment grade',
+    'fi.yldLabel': 'Rendement pond. (est.)', 'fi.yldNote': 'YTM mix\u00e9',
+    'c.sector': 'Exposition Sectorielle', 'c.geo': 'Exposition G\u00e9ographique',
+    'c.credit': 'Qualit\u00e9 de Cr\u00e9dit', 'c.duration': 'Distribution de Duration', 'c.maturity': 'Profil de Maturit\u00e9',
+    'up.label': 'Section 04', 'up.title': 'Importer un Portefeuille',
+    'up.desc': 'Importez une image ou saisissez les positions manuellement.',
+    'up.drop': 'D\u00e9posez une image ici', 'up.formats': 'PNG, JPG ou capture d\u2019\u00e9cran d\u2019un tableau',
+    'up.or': 'ou', 'up.browse': 'Parcourir',
+    'up.manual': 'Saisie Manuelle',
+    'up.manualDesc': 'Une position par ligne : <code style="background:var(--off-white);padding:2px 6px;border-radius:4px;font-size:11px;">TICKER, Poids%</code>',
+    'up.generate': 'G\u00e9n\u00e9rer le Rapport',
+    'tbl.ticker': 'Ticker', 'tbl.name': 'Nom', 'tbl.class': 'Classe', 'tbl.weight': 'Poids',
+    'footer': 'JC Advisory \u2014 Rapport de Portefeuille \u00b7 Confidentiel \u00b7 G\u00e9n\u00e9r\u00e9 le 10 avril 2026',
+    'det.simPerf': 'Performance Simul\u00e9e', 'det.breakdown': 'R\u00e9partition',
+    'det.weight': 'Poids', 'det.assetClass': 'Classe d\u2019actif', 'det.expReturn': 'Rend. ann. attendu',
+    'det.annVol': 'Volatilit\u00e9 ann.', 'det.effDur': 'Duration eff.', 'det.avgMat': 'Maturit\u00e9 moy.',
+    'det.yield': 'Rendement (YTM)', 'det.index': 'Indice', 'det.domicile': 'Domicile',
+    'det.replication': 'R\u00e9plication', 'det.subtype': 'Sous-type', 'det.currency': 'Devise',
+    'ac.equity': 'Actions', 'ac.fi': 'Obligations',
+    'cl.portfolio': 'Portefeuille', 'cl.msci': 'MSCI World',
+  },
+  pt: {
+    'nav.holdings': 'Posi\u00e7\u00f5es', 'nav.performance': 'Performance', 'nav.overview': 'Vis\u00e3o Geral',
+    'nav.equity': 'A\u00e7\u00f5es', 'nav.fi': 'Renda Fixa', 'nav.upload': 'Importar',
+    'hero.eyebrow': 'Relat\u00f3rio de Portf\u00f3lio', 'hero.title': 'Portf\u00f3lio de Gest\u00e3o de Patrim\u00f4nio',
+    'hero.date': 'Relat\u00f3rio gerado em 10 de abril de 2026',
+    'hero.holdings': 'Posi\u00e7\u00f5es', 'hero.equity': 'A\u00e7\u00f5es', 'hero.fi': 'Renda Fixa',
+    'hero.duration': 'Dura\u00e7\u00e3o pond.', 'hero.credit': 'Cr\u00e9dito pond.',
+    'hold.label': 'Portf\u00f3lio', 'hold.title': 'Posi\u00e7\u00f5es',
+    'hold.desc': 'Clique em uma posi\u00e7\u00e3o para ver suas caracter\u00edsticas e composi\u00e7\u00e3o.',
+    'perf.label': 'Performance', 'perf.title': 'Performance do Portf\u00f3lio',
+    'perf.desc': 'Crescimento simulado do portf\u00f3lio com pesos fixos, rebaseado para 100 em 1\u00ba de janeiro de 2023.',
+    'perf.growth': 'Crescimento de 100',
+    'perf.since': 'Desde jan. 2023', 'perf.cumRet': 'Retorno acumulado',
+    'perf.ytdLabel': 'No Ano', 'perf.ytdSub': 'Performance 2026',
+    'perf.medianLabel': 'Retorno Di\u00e1rio Mediano', 'perf.medianSub': 'Percentil 50',
+    'perf.volLabel': 'Volatilidade Anualizada', 'perf.volSub': 'Desvio padr\u00e3o \u00d7 \u221a252',
+    'ov.label': 'Se\u00e7\u00e3o 01', 'ov.title': 'Vis\u00e3o Geral do Portf\u00f3lio',
+    'ov.desc': 'Aloca\u00e7\u00e3o de ativos entre a\u00e7\u00f5es e renda fixa.',
+    'ov.alloc': 'Aloca\u00e7\u00e3o de Ativos', 'ov.comp': 'Composi\u00e7\u00e3o do Portf\u00f3lio', 'ov.eqFi': 'A\u00e7\u00f5es / RF',
+    'eq.label': 'Se\u00e7\u00e3o 02', 'eq.title': 'Detalhamento de A\u00e7\u00f5es',
+    'eq.desc': 'Exposi\u00e7\u00e3o setorial e geogr\u00e1fica ponderada pela aloca\u00e7\u00e3o.',
+    'fi.label': 'Se\u00e7\u00e3o 03', 'fi.title': 'Detalhamento de Renda Fixa',
+    'fi.desc': 'Qualidade de cr\u00e9dito, dura\u00e7\u00e3o, maturidade e exposi\u00e7\u00e3o das posi\u00e7\u00f5es.',
+    'fi.durLabel': 'Dura\u00e7\u00e3o ef. pond.', 'fi.durNote': 'Sensibilidade a juros',
+    'fi.matLabel': 'Maturidade m\u00e9d. pond.', 'fi.matNote': 'Prazo de reembolso',
+    'fi.ratLabel': 'Rating mediano pond.', 'fi.ratNote': 'Grau de investimento',
+    'fi.yldLabel': 'Rendimento pond. (est.)', 'fi.yldNote': 'YTM combinado',
+    'c.sector': 'Exposi\u00e7\u00e3o Setorial', 'c.geo': 'Exposi\u00e7\u00e3o Geogr\u00e1fica',
+    'c.credit': 'Qualidade de Cr\u00e9dito', 'c.duration': 'Distribui\u00e7\u00e3o de Dura\u00e7\u00e3o', 'c.maturity': 'Perfil de Maturidade',
+    'up.label': 'Se\u00e7\u00e3o 04', 'up.title': 'Importar Novo Portf\u00f3lio',
+    'up.desc': 'Importe uma imagem ou insira as posi\u00e7\u00f5es manualmente.',
+    'up.drop': 'Solte uma imagem aqui', 'up.formats': 'PNG, JPG ou captura de tela de uma tabela',
+    'up.or': 'ou', 'up.browse': 'Procurar Arquivos',
+    'up.manual': 'Entrada Manual',
+    'up.manualDesc': 'Uma posi\u00e7\u00e3o por linha: <code style="background:var(--off-white);padding:2px 6px;border-radius:4px;font-size:11px;">TICKER, Peso%</code>',
+    'up.generate': 'Gerar Relat\u00f3rio',
+    'tbl.ticker': 'Ticker', 'tbl.name': 'Nome', 'tbl.class': 'Classe', 'tbl.weight': 'Peso',
+    'footer': 'JC Advisory \u2014 Relat\u00f3rio de Portf\u00f3lio \u00b7 Confidencial \u00b7 Gerado em 10 de abril de 2026',
+    'det.simPerf': 'Performance Simulada', 'det.breakdown': 'Composi\u00e7\u00e3o',
+    'det.weight': 'Peso', 'det.assetClass': 'Classe de ativo', 'det.expReturn': 'Ret. anual esperado',
+    'det.annVol': 'Volatilidade an.', 'det.effDur': 'Dura\u00e7\u00e3o ef.', 'det.avgMat': 'Maturidade m\u00e9d.',
+    'det.yield': 'Rendimento (YTM)', 'det.index': '\u00cdndice', 'det.domicile': 'Domic\u00edlio',
+    'det.replication': 'Replica\u00e7\u00e3o', 'det.subtype': 'Subtipo', 'det.currency': 'Moeda',
+    'ac.equity': 'A\u00e7\u00f5es', 'ac.fi': 'Renda Fixa',
+    'cl.portfolio': 'Portf\u00f3lio', 'cl.msci': 'MSCI World',
+  }
+};
+
+function t(key) {
+  return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
+}
+
+function applyI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    el.innerHTML = t(el.getAttribute('data-i18n-html'));
+  });
+  // Footer
+  const footer = document.querySelector('footer');
+  if (footer) footer.textContent = t('footer');
+  // HTML lang
+  document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : currentLang;
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  // Update active flag
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick*="' + lang + '"]')?.classList.add('active');
+  applyI18n();
+  render(); // Re-render to update table headers, chart labels, holdings cards, etc.
+}
 
 // ── ETF Knowledge Base ──
 const ETF_DB = {
@@ -1645,7 +1869,7 @@ function renderPerformance() {
       labels: perf.dates,
       datasets: [
         {
-          label: 'Portfolio',
+          label: t('cl.portfolio'),
           data: perf.prices,
           borderColor: P.petrolDeep,
           borderWidth: 1.5,
@@ -1656,7 +1880,7 @@ function renderPerformance() {
           tension: 0.1,
         },
         {
-          label: 'MSCI World',
+          label: t('cl.msci'),
           data: msciWorld.prices,
           borderColor: '#C8A85C',
           borderWidth: 1.5,
@@ -1747,7 +1971,7 @@ function renderHoldingsGrid() {
       <div class="holding-card-ticker">${h.ticker}</div>
       <div class="holding-card-name">${etf.name}</div>
       <div class="holding-card-row">
-        <span class="tag ${tagCls}">${etf.assetClass}</span>
+        <span class="tag ${tagCls}">${isEq ? t('ac.equity') : t('ac.fi')}</span>
         <span class="holding-card-weight">${h.weight}%</span>
       </div>
       <div class="holding-card-bar" style="width:${h.weight * 2.5}%;background:${barColor}"></div>
@@ -1772,31 +1996,31 @@ function openDetail(ticker, weight) {
 
   // Build metrics row
   const metricItems = [
-    { label: 'Weight', value: weight + '%' },
-    { label: 'Asset Class', value: etf.assetClass },
+    { label: t('det.weight'), value: weight + '%' },
+    { label: t('det.assetClass'), value: isEq ? t('ac.equity') : t('ac.fi') },
     { label: 'TER', value: etf.ter ? (etf.ter < 1 ? etf.ter.toFixed(2) + '%' : etf.ter + '%') : '—' },
-    { label: 'Currency', value: etf.currency || '—' },
+    { label: t('det.currency'), value: etf.currency || '—' },
   ];
 
-  if (etf.duration) metricItems.push({ label: 'Eff. Duration', value: etf.duration.toFixed(1) + ' yr' });
-  if (etf.maturity) metricItems.push({ label: 'Avg. Maturity', value: etf.maturity.toFixed(1) + ' yr' });
-  if (etf.ytm) metricItems.push({ label: 'Yield (YTM)', value: etf.ytm.toFixed(1) + '%' });
-  metricItems.push({ label: 'Exp. Ann. Return', value: (params.annRet * 100).toFixed(1) + '%' });
-  if (!etf.duration) metricItems.push({ label: 'Ann. Volatility', value: (params.annVol * 100).toFixed(1) + '%' });
+  if (etf.duration) metricItems.push({ label: t('det.effDur'), value: etf.duration.toFixed(1) + ' yr' });
+  if (etf.maturity) metricItems.push({ label: t('det.avgMat'), value: etf.maturity.toFixed(1) + ' yr' });
+  if (etf.ytm) metricItems.push({ label: t('det.yield'), value: etf.ytm.toFixed(1) + '%' });
+  metricItems.push({ label: t('det.expReturn'), value: (params.annRet * 100).toFixed(1) + '%' });
+  if (!etf.duration) metricItems.push({ label: t('det.annVol'), value: (params.annVol * 100).toFixed(1) + '%' });
 
   // Extra info
   const infoItems = [];
-  if (etf.index) infoItems.push({ label: 'Index', value: etf.index });
-  if (etf.domicile) infoItems.push({ label: 'Domicile', value: etf.domicile });
-  if (etf.replication) infoItems.push({ label: 'Replication', value: etf.replication });
-  if (etf.fiSubtype) infoItems.push({ label: 'Sub-type', value: etf.fiSubtype });
+  if (etf.index) infoItems.push({ label: t('det.index'), value: etf.index });
+  if (etf.domicile) infoItems.push({ label: t('det.domicile'), value: etf.domicile });
+  if (etf.replication) infoItems.push({ label: t('det.replication'), value: etf.replication });
+  if (etf.fiSubtype) infoItems.push({ label: t('det.subtype'), value: etf.fiSubtype });
 
   modal.innerHTML = `
     <div class="detail-header">
       <div class="detail-header-left">
         <div class="detail-ticker">
           ${ticker}
-          <span class="tag ${tagCls}" style="font-size:11px">${etf.assetClass}</span>
+          <span class="tag ${tagCls}" style="font-size:11px">${isEq ? t('ac.equity') : t('ac.fi')}</span>
         </div>
         <div class="detail-name">${etf.name}</div>
       </div>
@@ -1825,12 +2049,12 @@ function openDetail(ticker, weight) {
         </div>
       ` : ''}
 
-      <div class="detail-section-title">Simulated Performance</div>
+      <div class="detail-section-title">${t('det.simPerf')}</div>
       <div style="height:200px;margin-bottom:1.5rem;">
         <canvas id="detailPerfChart"></canvas>
       </div>
 
-      <div class="detail-section-title">Breakdown</div>
+      <div class="detail-section-title">${t('det.breakdown')}</div>
       <div class="detail-chart-grid">
         ${etf.sectors ? `
           <div class="detail-chart-box">
@@ -2056,7 +2280,7 @@ function render() {
     tr.innerHTML = `
       <td><strong>${h.ticker}</strong></td>
       <td style="font-size:12px">${etf.name}</td>
-      <td><span class="tag ${cls}">${etf.assetClass}</span></td>
+      <td><span class="tag ${cls}">${etf.assetClass === 'Equity' ? t('ac.equity') : t('ac.fi')}</span></td>
       <td class="num"><strong>${h.weight}%</strong></td>
     `;
     tbody.appendChild(tr);
@@ -2151,6 +2375,7 @@ function render() {
 
   // ── Performance Chart ──
   renderPerformance();
+  applyI18n();
 }
 
 // ── File Upload Handling ──
