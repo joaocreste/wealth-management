@@ -579,21 +579,23 @@ section {
 
 .holding-card-ticker {
   font-family: 'Raleway', sans-serif;
-  font-size: 20px;
-  font-weight: 300;
-  letter-spacing: 0.06em;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   color: var(--navy);
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  line-height: 1.3;
 }
 
 .holding-card-name {
   font-family: 'Mulish', sans-serif;
-  font-size: 11px;
-  font-weight: 300;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--steel);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   line-height: 1.4;
   margin-bottom: 0.75rem;
-  min-height: 30px;
 }
 
 .holding-card-row {
@@ -797,6 +799,60 @@ section {
   color: var(--steel);
   line-height: 1.85;
   margin-bottom: 1.5rem;
+}
+
+/* ── CORRELATION TABLE ── */
+.corr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+}
+
+.corr-table th {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  padding: 10px 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.corr-table th:first-child {
+  text-align: left;
+}
+
+.corr-table td {
+  padding: 10px 12px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 12px;
+  border-top: 1px solid rgba(13,27,42,0.06);
+}
+
+.corr-table td:first-child {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.corr-table td.corr-empty {
+  background: transparent;
+}
+
+.corr-table td.corr-diag {
+  color: var(--steel);
+  font-weight: 300;
+}
+
+.corr-table td.corr-val {
+  font-weight: 500;
 }
 
 /* ── UPLOAD SECTION ── */
@@ -1093,7 +1149,7 @@ footer {
       </svg>
       <div class="landing-wordmark">
         <h1>JC Asset<br><span style="font-weight:200">Management</span></h1>
-        <p>Wealth Management</p>
+        <p data-i18n="land.subtitle">Wealth Management</p>
       </div>
     </div>
     <div class="landing-disclaimer" data-i18n="land.disclaimer">
@@ -1132,6 +1188,7 @@ footer {
       <li><a onclick="scrollToSection('#overview')" data-i18n="nav.overview">Overview</a></li>
       <li><a onclick="scrollToSection('#equity')" data-i18n="nav.equity">Equity</a></li>
       <li><a onclick="scrollToSection('#fixed-income')" data-i18n="nav.fi">Fixed Income</a></li>
+      <li><a onclick="scrollToSection('#correlation')" data-i18n="nav.corr">Correlation</a></li>
       <li><a onclick="scrollToSection('#upload')" data-i18n="nav.upload">Upload</a></li>
     </ul>
     <div class="lang-switcher">
@@ -1154,7 +1211,7 @@ footer {
     <div class="hero-eyebrow" data-i18n="hero.eyebrow">Portfolio Report</div>
     <h1 id="heroTitle" data-i18n="hero.title">Wealth Management Portfolio</h1>
     <div class="hero-divider"></div>
-    <p class="hero-sub" id="heroDate" data-i18n="hero.date">Report generated 10 April 2026</p>
+    <p class="hero-sub" id="heroDate" data-i18n="hero.date">Report generated</p>
     <div class="hero-stats">
       <div class="hero-stat">
         <span class="hero-stat-label" data-i18n="hero.holdings">Holdings</span>
@@ -1223,14 +1280,19 @@ footer {
           <div class="perf-metric-sub" data-i18n="perf.ytdSub">2026 performance</div>
         </div>
         <div class="perf-metric-card">
-          <div class="perf-metric-label" data-i18n="perf.medianLabel">Median Daily Return</div>
-          <div class="perf-metric-value" id="perfMedian">—</div>
-          <div class="perf-metric-sub" data-i18n="perf.medianSub">50th percentile</div>
+          <div class="perf-metric-label" data-i18n="perf.1yLabel">1-Year Return</div>
+          <div class="perf-metric-value" id="perf1Y">—</div>
+          <div class="perf-metric-sub" data-i18n="perf.1ySub">Trailing 12 months</div>
+        </div>
+        <div class="perf-metric-card">
+          <div class="perf-metric-label" data-i18n="perf.3yLabel">3-Year Return</div>
+          <div class="perf-metric-value" id="perf3Y">—</div>
+          <div class="perf-metric-sub" data-i18n="perf.3ySub">Trailing 36 months</div>
         </div>
         <div class="perf-metric-card">
           <div class="perf-metric-label" data-i18n="perf.volLabel">Annualised Volatility</div>
           <div class="perf-metric-value" id="perfVol">—</div>
-          <div class="perf-metric-sub" data-i18n="perf.volSub">Standard deviation &times; &radic;252</div>
+          <div class="perf-metric-sub" data-i18n="perf.volNote">Since Jan 2023 · σ daily × √252</div>
         </div>
       </div>
     </div>
@@ -1363,10 +1425,24 @@ footer {
 
 <div class="divider"></div>
 
-<!-- ═══════════ SECTION 4: UPLOAD ═══════════ -->
+<!-- ═══════════ SECTION 4: CORRELATION ═══════════ -->
+<section id="correlation">
+  <div class="container">
+    <div class="section-label" data-i18n="cor.label">Section 04</div>
+    <div class="section-title" data-i18n="cor.title">Correlation Matrix</div>
+    <div class="section-desc" data-i18n="cor.desc">Pairwise correlation of daily returns between portfolio holdings since January 2023.</div>
+    <div class="card" style="overflow-x:auto;">
+      <table class="corr-table" id="corrTable"></table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ SECTION 5: UPLOAD ═══════════ -->
 <section id="upload">
   <div class="container">
-    <div class="section-label" data-i18n="up.label">Section 04</div>
+    <div class="section-label" data-i18n="up.label">Section 05</div>
     <div class="section-title" data-i18n="up.title">Upload New Portfolio</div>
     <div class="section-desc" data-i18n="up.desc">Upload a portfolio image or enter holdings manually to generate a new report.</div>
 
@@ -1403,7 +1479,7 @@ footer {
 </section>
 
 <footer>
-  JC Advisory &mdash; Wealth Management Portfolio Report &middot; Confidential &middot; Generated 10 April 2026
+  JC Advisory &mdash; Wealth Management Portfolio Report &middot; Confidential
 </footer>
 
 <!-- ═══════════════════════════════════════════════════════ -->
@@ -1448,7 +1524,7 @@ const I18N = {
     'nav.equity': 'Equity', 'nav.fi': 'Fixed Income', 'nav.upload': 'Upload',
     // Hero
     'hero.eyebrow': 'Portfolio Report', 'hero.title': 'Wealth Management Portfolio',
-    'hero.date': 'Report generated 10 April 2026',
+    'hero.date': 'Report generated {date}',
     'hero.holdings': 'Holdings', 'hero.equity': 'Equity', 'hero.fi': 'Fixed Income',
     'hero.duration': 'Wtd. Duration', 'hero.credit': 'Wtd. Credit',
     // Holdings
@@ -1459,9 +1535,11 @@ const I18N = {
     'perf.desc': 'Simulated growth of the portfolio with fixed weights, rebased to 100 on 1 January 2023.',
     'perf.growth': 'Growth of 100',
     'perf.since': 'Since Jan 2023', 'perf.cumRet': 'Cumulative return',
-    'perf.ytdLabel': 'Year-to-Date', 'perf.ytdSub': '2026 performance',
-    'perf.medianLabel': 'Median Daily Return', 'perf.medianSub': '50th percentile',
-    'perf.volLabel': 'Annualised Volatility', 'perf.volSub': 'Standard deviation \u00d7 \u221a252',
+    'perf.ytdLabel': 'Year-to-Date', 'perf.ytdSub': 'YTD performance',
+    'perf.1yLabel': '1-Year Return', 'perf.1ySub': 'Trailing 12 months',
+    'perf.3yLabel': '3-Year Return', 'perf.3ySub': 'Trailing 36 months',
+    'perf.volLabel': 'Annualised Volatility',
+    'perf.volNote': 'Since Jan 2023 \u00b7 \u03c3 daily \u00d7 \u221a252',
     // Overview
     'ov.label': 'Section 01', 'ov.title': 'Portfolio Overview',
     'ov.desc': 'Asset allocation and composition across equity and fixed income holdings.',
@@ -1480,7 +1558,11 @@ const I18N = {
     'c.sector': 'Sector Exposure', 'c.geo': 'Geographic Exposure',
     'c.credit': 'Credit Quality', 'c.duration': 'Duration Distribution', 'c.maturity': 'Maturity Profile',
     // Upload
-    'up.label': 'Section 04', 'up.title': 'Upload New Portfolio',
+    // Correlation
+    'nav.corr': 'Correlation',
+    'cor.label': 'Section 04', 'cor.title': 'Correlation Matrix',
+    'cor.desc': 'Pairwise correlation of daily returns between portfolio holdings since January 2023.',
+    'up.label': 'Section 05', 'up.title': 'Upload New Portfolio',
     'up.desc': 'Upload a portfolio image or enter holdings manually to generate a new report.',
     'up.drop': 'Drop portfolio image here', 'up.formats': 'Supports PNG, JPG, or screenshot of a portfolio table',
     'up.or': 'or', 'up.browse': 'Browse Files',
@@ -1490,10 +1572,11 @@ const I18N = {
     // Table
     'tbl.ticker': 'Ticker', 'tbl.name': 'Name', 'tbl.class': 'Class', 'tbl.weight': 'Weight',
     // Footer
-    'footer': 'JC Advisory \u2014 Wealth Management Portfolio Report \u00b7 Confidential \u00b7 Generated 10 April 2026',
+    'footer': 'JC Advisory \u2014 Wealth Management Portfolio Report \u00b7 Confidential \u00b7 Generated {date}',
     // Landing
     'land.disclaimer': 'The information provided is for general informational and educational purposes only and should not be construed as financial, investment, legal, or tax advice. Nothing contained herein constitutes a recommendation, solicitation, or offer to buy or sell any security, financial instrument, or investment product. Any views expressed are subject to change without notice and may not reflect current market conditions. You should consult your own financial, legal, tax, or other professional advisor before making any investment decision. Past performance is not indicative of future results, and all investments involve risk, including the possible loss of principal.',
     'land.enter': 'Enter',
+    'land.subtitle': 'Wealth Management',
     // Detail modal
     'det.simPerf': 'Simulated Performance', 'det.breakdown': 'Breakdown',
     'det.weight': 'Weight', 'det.assetClass': 'Asset Class', 'det.expReturn': 'Exp. Ann. Return',
@@ -1509,7 +1592,7 @@ const I18N = {
     'nav.holdings': 'Positions', 'nav.performance': 'Performance', 'nav.overview': 'Aper\u00e7u',
     'nav.equity': 'Actions', 'nav.fi': 'Obligations', 'nav.upload': 'Importer',
     'hero.eyebrow': 'Rapport de Portefeuille', 'hero.title': 'Portefeuille de Gestion de Patrimoine',
-    'hero.date': 'Rapport g\u00e9n\u00e9r\u00e9 le 10 avril 2026',
+    'hero.date': 'Rapport g\u00e9n\u00e9r\u00e9 le {date}',
     'hero.holdings': 'Positions', 'hero.equity': 'Actions', 'hero.fi': 'Obligations',
     'hero.duration': 'Dur. pond.', 'hero.credit': 'Cr\u00e9dit pond.',
     'hold.label': 'Portefeuille', 'hold.title': 'Positions',
@@ -1518,9 +1601,11 @@ const I18N = {
     'perf.desc': 'Croissance simul\u00e9e du portefeuille \u00e0 poids fixes, rebas\u00e9e \u00e0 100 au 1er janvier 2023.',
     'perf.growth': 'Croissance de 100',
     'perf.since': 'Depuis jan. 2023', 'perf.cumRet': 'Rendement cumul\u00e9',
-    'perf.ytdLabel': 'Depuis d\u00e9but d\u2019ann\u00e9e', 'perf.ytdSub': 'Performance 2026',
-    'perf.medianLabel': 'Rendement quotidien m\u00e9dian', 'perf.medianSub': '50\u00e8me percentile',
-    'perf.volLabel': 'Volatilit\u00e9 annualis\u00e9e', 'perf.volSub': '\u00c9cart-type \u00d7 \u221a252',
+    'perf.ytdLabel': 'Depuis d\u00e9but d\u2019ann\u00e9e', 'perf.ytdSub': 'Performance YTD',
+    'perf.1yLabel': 'Rendement 1 an', 'perf.1ySub': '12 derniers mois',
+    'perf.3yLabel': 'Rendement 3 ans', 'perf.3ySub': '36 derniers mois',
+    'perf.volLabel': 'Volatilit\u00e9 annualis\u00e9e',
+    'perf.volNote': 'Depuis jan. 2023 \u00b7 \u03c3 quotidien \u00d7 \u221a252',
     'ov.label': 'Section 01', 'ov.title': 'Aper\u00e7u du Portefeuille',
     'ov.desc': 'R\u00e9partition des actifs entre actions et obligations.',
     'ov.alloc': 'R\u00e9partition des Actifs', 'ov.comp': 'Composition du Portefeuille', 'ov.eqFi': 'Actions / Oblig.',
@@ -1534,7 +1619,10 @@ const I18N = {
     'fi.yldLabel': 'Rendement pond. (est.)', 'fi.yldNote': 'YTM mix\u00e9',
     'c.sector': 'Exposition Sectorielle', 'c.geo': 'Exposition G\u00e9ographique',
     'c.credit': 'Qualit\u00e9 de Cr\u00e9dit', 'c.duration': 'Distribution de Duration', 'c.maturity': 'Profil de Maturit\u00e9',
-    'up.label': 'Section 04', 'up.title': 'Importer un Portefeuille',
+    'nav.corr': 'Corr\u00e9lation',
+    'cor.label': 'Section 04', 'cor.title': 'Matrice de Corr\u00e9lation',
+    'cor.desc': 'Corr\u00e9lation des rendements journaliers entre les positions du portefeuille depuis janvier 2023.',
+    'up.label': 'Section 05', 'up.title': 'Importer un Portefeuille',
     'up.desc': 'Importez une image ou saisissez les positions manuellement.',
     'up.drop': 'D\u00e9posez une image ici', 'up.formats': 'PNG, JPG ou capture d\u2019\u00e9cran d\u2019un tableau',
     'up.or': 'ou', 'up.browse': 'Parcourir',
@@ -1542,9 +1630,10 @@ const I18N = {
     'up.manualDesc': 'Une position par ligne : <code style="background:var(--off-white);padding:2px 6px;border-radius:4px;font-size:11px;">TICKER, Poids%</code>',
     'up.generate': 'G\u00e9n\u00e9rer le Rapport',
     'tbl.ticker': 'Ticker', 'tbl.name': 'Nom', 'tbl.class': 'Classe', 'tbl.weight': 'Poids',
-    'footer': 'JC Advisory \u2014 Rapport de Portefeuille \u00b7 Confidentiel \u00b7 G\u00e9n\u00e9r\u00e9 le 10 avril 2026',
+    'footer': 'JC Advisory \u2014 Rapport de Portefeuille \u00b7 Confidentiel \u00b7 G\u00e9n\u00e9r\u00e9 le {date}',
     'land.disclaimer': 'Les informations fournies le sont \u00e0 titre informatif et \u00e9ducatif uniquement et ne doivent pas \u00eatre interpr\u00e9t\u00e9es comme des conseils financiers, d\u2019investissement, juridiques ou fiscaux. Rien dans ce document ne constitue une recommandation, une sollicitation ou une offre d\u2019achat ou de vente de titres, d\u2019instruments financiers ou de produits d\u2019investissement. Les opinions exprim\u00e9es peuvent \u00eatre modifi\u00e9es sans pr\u00e9avis et peuvent ne pas refl\u00e9ter les conditions actuelles du march\u00e9. Vous devez consulter votre propre conseiller financier, juridique, fiscal ou autre professionnel avant de prendre toute d\u00e9cision d\u2019investissement. Les performances pass\u00e9es ne pr\u00e9jugent pas des r\u00e9sultats futurs, et tout investissement comporte des risques, y compris la perte \u00e9ventuelle du capital.',
     'land.enter': 'Entrer',
+    'land.subtitle': 'Gestion de Patrimoine',
     'det.simPerf': 'Performance Simul\u00e9e', 'det.breakdown': 'R\u00e9partition',
     'det.weight': 'Poids', 'det.assetClass': 'Classe d\u2019actif', 'det.expReturn': 'Rend. ann. attendu',
     'det.annVol': 'Volatilit\u00e9 ann.', 'det.effDur': 'Duration eff.', 'det.avgMat': 'Maturit\u00e9 moy.',
@@ -1557,7 +1646,7 @@ const I18N = {
     'nav.holdings': 'Posi\u00e7\u00f5es', 'nav.performance': 'Performance', 'nav.overview': 'Vis\u00e3o Geral',
     'nav.equity': 'A\u00e7\u00f5es', 'nav.fi': 'Renda Fixa', 'nav.upload': 'Importar',
     'hero.eyebrow': 'Relat\u00f3rio de Portf\u00f3lio', 'hero.title': 'Portf\u00f3lio de Gest\u00e3o de Patrim\u00f4nio',
-    'hero.date': 'Relat\u00f3rio gerado em 10 de abril de 2026',
+    'hero.date': 'Relat\u00f3rio gerado em {date}',
     'hero.holdings': 'Posi\u00e7\u00f5es', 'hero.equity': 'A\u00e7\u00f5es', 'hero.fi': 'Renda Fixa',
     'hero.duration': 'Dura\u00e7\u00e3o pond.', 'hero.credit': 'Cr\u00e9dito pond.',
     'hold.label': 'Portf\u00f3lio', 'hold.title': 'Posi\u00e7\u00f5es',
@@ -1566,9 +1655,11 @@ const I18N = {
     'perf.desc': 'Crescimento simulado do portf\u00f3lio com pesos fixos, rebaseado para 100 em 1\u00ba de janeiro de 2023.',
     'perf.growth': 'Crescimento de 100',
     'perf.since': 'Desde jan. 2023', 'perf.cumRet': 'Retorno acumulado',
-    'perf.ytdLabel': 'No Ano', 'perf.ytdSub': 'Performance 2026',
-    'perf.medianLabel': 'Retorno Di\u00e1rio Mediano', 'perf.medianSub': 'Percentil 50',
-    'perf.volLabel': 'Volatilidade Anualizada', 'perf.volSub': 'Desvio padr\u00e3o \u00d7 \u221a252',
+    'perf.ytdLabel': 'No Ano', 'perf.ytdSub': 'Performance YTD',
+    'perf.1yLabel': 'Retorno 1 Ano', 'perf.1ySub': '\u00daltimos 12 meses',
+    'perf.3yLabel': 'Retorno 3 Anos', 'perf.3ySub': '\u00daltimos 36 meses',
+    'perf.volLabel': 'Volatilidade Anualizada',
+    'perf.volNote': 'Desde jan. 2023 \u00b7 \u03c3 di\u00e1rio \u00d7 \u221a252',
     'ov.label': 'Se\u00e7\u00e3o 01', 'ov.title': 'Vis\u00e3o Geral do Portf\u00f3lio',
     'ov.desc': 'Aloca\u00e7\u00e3o de ativos entre a\u00e7\u00f5es e renda fixa.',
     'ov.alloc': 'Aloca\u00e7\u00e3o de Ativos', 'ov.comp': 'Composi\u00e7\u00e3o do Portf\u00f3lio', 'ov.eqFi': 'A\u00e7\u00f5es / RF',
@@ -1582,7 +1673,10 @@ const I18N = {
     'fi.yldLabel': 'Rendimento pond. (est.)', 'fi.yldNote': 'YTM combinado',
     'c.sector': 'Exposi\u00e7\u00e3o Setorial', 'c.geo': 'Exposi\u00e7\u00e3o Geogr\u00e1fica',
     'c.credit': 'Qualidade de Cr\u00e9dito', 'c.duration': 'Distribui\u00e7\u00e3o de Dura\u00e7\u00e3o', 'c.maturity': 'Perfil de Maturidade',
-    'up.label': 'Se\u00e7\u00e3o 04', 'up.title': 'Importar Novo Portf\u00f3lio',
+    'nav.corr': 'Correla\u00e7\u00e3o',
+    'cor.label': 'Se\u00e7\u00e3o 04', 'cor.title': 'Matriz de Correla\u00e7\u00e3o',
+    'cor.desc': 'Correla\u00e7\u00e3o dos retornos di\u00e1rios entre as posi\u00e7\u00f5es do portf\u00f3lio desde janeiro de 2023.',
+    'up.label': 'Se\u00e7\u00e3o 05', 'up.title': 'Importar Novo Portf\u00f3lio',
     'up.desc': 'Importe uma imagem ou insira as posi\u00e7\u00f5es manualmente.',
     'up.drop': 'Solte uma imagem aqui', 'up.formats': 'PNG, JPG ou captura de tela de uma tabela',
     'up.or': 'ou', 'up.browse': 'Procurar Arquivos',
@@ -1590,9 +1684,10 @@ const I18N = {
     'up.manualDesc': 'Uma posi\u00e7\u00e3o por linha: <code style="background:var(--off-white);padding:2px 6px;border-radius:4px;font-size:11px;">TICKER, Peso%</code>',
     'up.generate': 'Gerar Relat\u00f3rio',
     'tbl.ticker': 'Ticker', 'tbl.name': 'Nome', 'tbl.class': 'Classe', 'tbl.weight': 'Peso',
-    'footer': 'JC Advisory \u2014 Relat\u00f3rio de Portf\u00f3lio \u00b7 Confidencial \u00b7 Gerado em 10 de abril de 2026',
+    'footer': 'JC Advisory \u2014 Relat\u00f3rio de Portf\u00f3lio \u00b7 Confidencial \u00b7 Gerado em {date}',
     'land.disclaimer': 'As informa\u00e7\u00f5es fornecidas t\u00eam car\u00e1ter meramente informativo e educacional e n\u00e3o devem ser interpretadas como aconselhamento financeiro, de investimento, jur\u00eddico ou fiscal. Nada aqui contido constitui uma recomenda\u00e7\u00e3o, solicita\u00e7\u00e3o ou oferta de compra ou venda de qualquer t\u00edtulo, instrumento financeiro ou produto de investimento. Quaisquer opini\u00f5es expressas est\u00e3o sujeitas a altera\u00e7\u00f5es sem aviso pr\u00e9vio e podem n\u00e3o refletir as condi\u00e7\u00f5es atuais do mercado. Voc\u00ea deve consultar seu pr\u00f3prio consultor financeiro, jur\u00eddico, fiscal ou outro profissional antes de tomar qualquer decis\u00e3o de investimento. Desempenho passado n\u00e3o \u00e9 indicativo de resultados futuros, e todos os investimentos envolvem risco, incluindo a possibilidade de perda do capital.',
     'land.enter': 'Entrar',
+    'land.subtitle': 'Gestão de Patrimônio',
     'det.simPerf': 'Performance Simulada', 'det.breakdown': 'Composi\u00e7\u00e3o',
     'det.weight': 'Peso', 'det.assetClass': 'Classe de ativo', 'det.expReturn': 'Ret. anual esperado',
     'det.annVol': 'Volatilidade an.', 'det.effDur': 'Dura\u00e7\u00e3o ef.', 'det.avgMat': 'Maturidade m\u00e9d.',
@@ -1607,16 +1702,35 @@ function t(key) {
   return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
 }
 
+function todayFormatted() {
+  const d = new Date();
+  const day = d.getDate();
+  const year = d.getFullYear();
+  const monthsEN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const monthsFR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  const monthsPT = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  if (currentLang === 'fr') return day + ' ' + monthsFR[d.getMonth()] + ' ' + year;
+  if (currentLang === 'pt') return day + ' de ' + monthsPT[d.getMonth()] + ' de ' + year;
+  return day + ' ' + monthsEN[d.getMonth()] + ' ' + year;
+}
+
 function applyI18n() {
+  const dateStr = todayFormatted();
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    el.textContent = t(el.getAttribute('data-i18n'));
+    let txt = t(el.getAttribute('data-i18n'));
+    if (txt.includes('{date}')) txt = txt.replace('{date}', dateStr);
+    el.textContent = txt;
   });
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     el.innerHTML = t(el.getAttribute('data-i18n-html'));
   });
   // Footer
   const footer = document.querySelector('footer');
-  if (footer) footer.textContent = t('footer');
+  if (footer) {
+    let ftxt = t('footer');
+    if (ftxt.includes('{date}')) ftxt = ftxt.replace('{date}', dateStr);
+    footer.textContent = ftxt;
+  }
   // HTML lang
   document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : currentLang;
 }
@@ -1625,7 +1739,7 @@ function setLang(lang) {
   currentLang = lang;
   // Update active flag
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.lang-btn[onclick*="' + lang + '"]')?.classList.add('active');
+  document.querySelectorAll('.lang-btn[onclick*="' + lang + '"]').forEach(b => b.classList.add('active'));
   applyI18n();
   render(); // Re-render to update table headers, chart labels, holdings cards, etc.
 }
@@ -2039,10 +2153,16 @@ function generatePerformanceData(holdings) {
   const ytdIdx = dates.findIndex(dt => dt.getFullYear() === 2026);
   const ytdReturn = ytdIdx > 0 ? (lastPrice / portfolioPrices[ytdIdx] - 1) * 100 : 0;
 
-  // Median daily return
-  const sorted = [...dailyReturns].sort((a, b) => a - b);
-  const mid = Math.floor(sorted.length / 2);
-  const medianReturn = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+  // 1Y return: find date ~1 year ago
+  const lastDate = dates[dates.length - 1];
+  const oneYearAgo = new Date(lastDate); oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+  const idx1Y = dates.findIndex(dt => dt >= oneYearAgo);
+  const return1Y = idx1Y >= 0 ? (lastPrice / portfolioPrices[idx1Y] - 1) * 100 : null;
+
+  // 3Y return: find date ~3 years ago
+  const threeYearsAgo = new Date(lastDate); threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
+  const idx3Y = dates.findIndex(dt => dt >= threeYearsAgo);
+  const return3Y = idx3Y >= 0 ? (lastPrice / portfolioPrices[idx3Y] - 1) * 100 : null;
 
   // Annualised volatility
   const mean = dailyReturns.reduce((s, r) => s + r, 0) / dailyReturns.length;
@@ -2054,7 +2174,8 @@ function generatePerformanceData(holdings) {
     prices: portfolioPrices,
     cumReturn,
     ytdReturn,
-    medianReturn: medianReturn * 100,
+    return1Y,
+    return3Y,
     annVol
   };
 }
@@ -2079,9 +2200,13 @@ function renderPerformance() {
   elYTD.textContent = fmt(perf.ytdReturn);
   elYTD.className = 'perf-metric-value ' + cls(perf.ytdReturn);
 
-  const elMedian = document.getElementById('perfMedian');
-  elMedian.textContent = fmt(perf.medianReturn, 3);
-  elMedian.className = 'perf-metric-value ' + cls(perf.medianReturn);
+  const el1Y = document.getElementById('perf1Y');
+  if (perf.return1Y !== null) { el1Y.textContent = fmt(perf.return1Y); el1Y.className = 'perf-metric-value ' + cls(perf.return1Y); }
+  else el1Y.textContent = 'N/A';
+
+  const el3Y = document.getElementById('perf3Y');
+  if (perf.return3Y !== null) { el3Y.textContent = fmt(perf.return3Y); el3Y.className = 'perf-metric-value ' + cls(perf.return3Y); }
+  else el3Y.textContent = 'N/A';
 
   document.getElementById('perfVol').textContent = perf.annVol.toFixed(1) + '%';
 
@@ -2198,8 +2323,8 @@ function renderHoldingsGrid() {
     card.className = 'holding-card';
     card.onclick = () => openDetail(h.ticker, h.weight);
     card.innerHTML = `
-      <div class="holding-card-ticker">${h.ticker}</div>
-      <div class="holding-card-name">${etf.name}</div>
+      <div class="holding-card-ticker">${etf.name}</div>
+      <div class="holding-card-name">${h.ticker}</div>
       <div class="holding-card-row">
         <span class="tag ${tagCls}">${isEq ? t('ac.equity') : t('ac.fi')}</span>
         <span class="holding-card-weight">${h.weight}%</span>
@@ -2448,6 +2573,96 @@ function closeDetail() {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
 
 // ── Render Everything ──
+function renderCorrelationMatrix() {
+  const table = document.getElementById('corrTable');
+  table.innerHTML = '';
+
+  // Generate daily returns per ETF using same logic as performance
+  const startDate = new Date(2023, 0, 2);
+  const endDate = new Date();
+  const dates = [];
+  let d = new Date(startDate);
+  while (d <= endDate) {
+    const dow = d.getDay();
+    if (dow !== 0 && dow !== 6) dates.push(new Date(d));
+    d.setDate(d.getDate() + 1);
+  }
+  const tradingDays = dates.length;
+  const tickers = portfolio.map(h => h.ticker);
+
+  // Generate per-ETF daily returns
+  const etfReturns = {};
+  tickers.forEach(ticker => {
+    let seed = 42;
+    // Use same seed derivation as generatePerformanceData for a single-holding portfolio
+    const holdings = [{ ticker, weight: 100 }];
+    holdings.forEach(h => { for (let i = 0; i < h.ticker.length; i++) seed = seed * 31 + h.ticker.charCodeAt(i); });
+    const rng = mulberry32(seed & 0x7FFFFFFF);
+    const params = ETF_PARAMS[ticker] || { annRet: 0.05, annVol: 0.10 };
+    const dailyMu = params.annRet / 252;
+    const dailySigma = params.annVol / Math.sqrt(252);
+    const prices = [100];
+    for (let i = 1; i < tradingDays; i++) {
+      const shock = normalRandom(rng);
+      const ret = dailyMu + dailySigma * shock;
+      prices.push(prices[i - 1] * (1 + ret));
+    }
+    const returns = [];
+    for (let i = 1; i < prices.length; i++) returns.push(prices[i] / prices[i - 1] - 1);
+    etfReturns[ticker] = returns;
+  });
+
+  // Compute correlation
+  function pearson(a, b) {
+    const n = Math.min(a.length, b.length);
+    let sumA = 0, sumB = 0, sumAB = 0, sumA2 = 0, sumB2 = 0;
+    for (let i = 0; i < n; i++) {
+      sumA += a[i]; sumB += b[i]; sumAB += a[i] * b[i];
+      sumA2 += a[i] * a[i]; sumB2 += b[i] * b[i];
+    }
+    const num = n * sumAB - sumA * sumB;
+    const den = Math.sqrt((n * sumA2 - sumA * sumA) * (n * sumB2 - sumB * sumB));
+    return den === 0 ? 0 : num / den;
+  }
+
+  // Color for correlation value
+  function corrColor(v) {
+    if (v >= 0.7) return 'rgba(184,149,74,0.18)';
+    if (v >= 0.4) return 'rgba(184,149,74,0.08)';
+    if (v >= 0) return 'transparent';
+    if (v >= -0.3) return 'rgba(122,143,166,0.08)';
+    return 'rgba(122,143,166,0.18)';
+  }
+
+  // Header row
+  const thead = document.createElement('thead');
+  const hRow = document.createElement('tr');
+  hRow.innerHTML = '<th></th>' + tickers.map(t => `<th>${t}</th>`).join('');
+  thead.appendChild(hRow);
+  table.appendChild(thead);
+
+  // Body — lower triangle
+  const tbody = document.createElement('tbody');
+  for (let i = 0; i < tickers.length; i++) {
+    const tr = document.createElement('tr');
+    let html = `<td>${tickers[i]}</td>`;
+    for (let j = 0; j < tickers.length; j++) {
+      if (j > i) {
+        html += '<td class="corr-empty"></td>';
+      } else if (j === i) {
+        html += '<td class="corr-diag">1.00</td>';
+      } else {
+        const corr = pearson(etfReturns[tickers[i]], etfReturns[tickers[j]]);
+        const bg = corrColor(corr);
+        html += `<td class="corr-val" style="background:${bg}">${corr.toFixed(2)}</td>`;
+      }
+    }
+    tr.innerHTML = html;
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
+}
+
 function render() {
   destroyCharts();
 
@@ -2605,6 +2820,10 @@ function render() {
 
   // ── Performance Chart ──
   renderPerformance();
+
+  // ── Correlation Matrix ──
+  renderCorrelationMatrix();
+
   applyI18n();
 }
 
