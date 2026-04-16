@@ -487,13 +487,9 @@ section {
 
 /* ── PERFORMANCE SECTION ── */
 .perf-layout {
-  display: grid;
-  grid-template-columns: 1fr 280px;
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .perf-layout { grid-template-columns: 1fr; }
 }
 
 .perf-chart-card {
@@ -501,17 +497,22 @@ section {
   border-radius: 4px;
   border: 0.5px solid rgba(0,0,0,0.08);
   padding: 1.5rem 2rem 1rem;
+  width: 100%;
 }
 
 .perf-chart-wrap {
   position: relative;
-  height: 280px;
+  height: 320px;
 }
 
 .perf-metrics {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .perf-metrics { grid-template-columns: repeat(2, 1fr); }
 }
 
 .perf-metric-card {
@@ -519,7 +520,6 @@ section {
   border-radius: 4px;
   border: 0.5px solid rgba(0,0,0,0.08);
   padding: 1.25rem 1.5rem;
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
